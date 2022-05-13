@@ -21,6 +21,7 @@ body {
 
 .child {
     display: flex;
+    align-items: center;
     justify-content: center;
     width: 20cm;
     height: 13.72cm;
