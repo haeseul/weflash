@@ -66,32 +66,33 @@ body {
 }
 
 .buttons {
-    background-color: gray;
+    display: flex;
     position: relative;
-    top: 0.5cm;
-    width: 1cm;
-    height: 1cm;
+}
+
+.prev_button,
+.next_button,
+.fullpage_button {
+    position: absolute;
+    width: 1.2cm;
+    height: 1.2cm;
+    margin: 0;
+    border: none;
+    font-size: 12px;
     border-radius: 100%;
 }
-.buttons:before {
-    background: gray;
-    content: "";
-    position: absolute;
+
+.prev_button {
     top: -1cm;
+    left: -2cm;
+}
+
+.next_button {
+    top: -1cm;
+}
+
+.fullpage_button {
     left: -1cm;
-    width: 1cm;
-    height: 1cm;
-    border-radius: 100%;
-}
-.buttons:after {
-    background: gray;
-    content: "";
-    position: absolute;
-    top: -1cm;
-    left: 1cm;
-    width: 1cm;
-    height: 1cm;
-    border-radius: 100%;
 }
 
 @media (max-width: 20.54cm) {
