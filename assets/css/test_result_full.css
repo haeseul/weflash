@@ -2,12 +2,17 @@
     display: none;
 }
 
+.display {
+    display: inline-block;
+    flex-direction: column;
+    overflow: auto;
+}
+
 .test_result_full {
     display: inline-block;
     width: 100%;
     text-align: center;
-    overflow: auto;
-    padding: 14px;
+    padding-top: 14px;
 }
 
 .test_result_header {
@@ -87,7 +92,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
+    padding: 20px 0 60px 0;
 }
 
 .test_result_footer a {
@@ -150,4 +155,104 @@
     width: 30px;
     height: 30px;
     margin: 20px 40px;
+}
+
+.developer_info {
+    background-color: rgb(100, 100, 100);
+    display: inline-block;
+    text-align: left;
+    padding: 14px 14px 42px 14px;
+}
+
+.developer_info_intro {
+    color: #FFE699;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.developer_info_text {
+    padding-bottom: 10px;
+    font-size: 11px;
+}
+
+.notion {
+    padding: 20px 0;
+    font-size: 8px;
+}
+
+.notion a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.notion_with_pointer {
+    position: relative;
+}
+
+.notion_icon {
+    width: 30px;
+    height: 30px;
+    fill: #949494;
+    padding-right: 15px;
+}
+
+.pointer {
+    position: absolute;
+    fill: #fff;
+    width: 20px;
+    height: 20px;
+    top: 15px;
+    left: 20px;
+    transform: rotate(-10deg);
+}
+
+.developers {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.developer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.seul {
+    transform: scaleX(-1);
+}
+
+.char img {
+    width: 30px;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.name {
+    padding: 0 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    font-size: 9px;
+    padding: 0 10px;
+}
+
+.info svg{
+    fill: #dbdbdb;
+    width: 18px;
+    height: 18px;
+    padding: 0 8px;
+}
+
+.mail, .github {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
 }
