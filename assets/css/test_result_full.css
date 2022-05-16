@@ -92,7 +92,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0 60px 0;
+    padding: 20px 0;
 }
 
 .test_result_footer a {
@@ -155,6 +155,35 @@
     width: 30px;
     height: 30px;
     margin: 20px 40px;
+}
+
+.share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 0 80px 0;
+}
+
+.share_intro {
+    color: #FFE699;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 20px 0;
+}
+
+.share_text {
+    padding: 20px 0;
+}
+
+.share_icons {
+    padding: 16px 0;
+}
+
+.share_icon {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
 }
 
 .developer_info {
