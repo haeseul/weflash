@@ -1,7 +1,3 @@
-::-webkit-scrollbar {
-    display: none;
-}
-
 .display {
     display: inline-block;
     flex-direction: column;
