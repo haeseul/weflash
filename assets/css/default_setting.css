@@ -84,6 +84,14 @@ body {
     border: none;
     font-size: 12px;
     border-radius: 100%;
+    cursor: pointer;
+}
+
+.prev_button:hover, .prev_button:focus,
+.next_button:hover, .next_button:focus,
+.fullpage_button:hover, .fullpage_button:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em #404040;
+    transform: translateY(-0.25em);
 }
 
 .prev_button {
@@ -97,6 +105,12 @@ body {
 
 .fullpage_button {
     left: -1cm;
+}
+
+.prev_button:disabled, .next_button:disabled {
+    box-shadow: none;
+    transform: none;
+    cursor: default;
 }
 
 @media (max-width: 20.54cm) {

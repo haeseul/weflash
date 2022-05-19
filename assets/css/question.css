@@ -47,21 +47,18 @@
 }
 
 .packman1 {
-    margin: 0 110px 10px 0;
+    margin: 0 110px 20px 0;
 }
 
 .packman2 {
-    margin: 10px 0 0 110px;
+    margin: 20px 0 0 110px;
 }
 
 .packman1 img, .packman2 img{
-    width: 1cm;
-    height: 1cm;
+    width: 0.8cm;
 }
 
 .packman2 img{
-    width: 1cm;
-    height: 1cm;
     transform: scaleX(-1);
 }
 
