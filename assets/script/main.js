@@ -78,6 +78,8 @@
             gameStart()
         })
     }
-    init()
+    //init()
+    gameReady()
+    gameStart()
   })()
   

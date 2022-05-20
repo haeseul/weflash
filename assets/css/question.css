@@ -1,16 +1,3 @@
-.display {
-    position: relative;
-}
-
-.tetris {
-    position: absolute;
-    width: calc(100% - 28px);
-    height: calc(100% - 28px);
-    overflow: auto;
-    top: 14px;
-    left: 14px;
-}
-
 .question_page {
     display: none;
 }

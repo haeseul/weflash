@@ -26,8 +26,6 @@
         17: {"title": "문제 18번", "mbti_type": "TF", "A": "T", "B": "F"},
         18: {"title": "문제 19번", "mbti_type": "JP", "A": "J", "B": "P"},
         19: {"title": "문제 20번", "mbti_type": "EI", "A": "E", "B": "I"},
-
-
     }
     
     const get = (target) => {
@@ -45,6 +43,8 @@
     const $resultPage = get('.test_result')
     const $answer1 = get('.answer1')
     const $answer2 = get('.answer2')
+
+    const $tetris = get('.tetris')
 
 
     let mbti_value = "N"
@@ -137,8 +137,19 @@
 
     }
 
-    const init = () => {
+    const buildTetris = () => {
+        // 테트리스 블록 추가하기
+        for (let i = 20; i >= 1; i--) {
+            const tetrisBlock = document.createElement('img');
+            tetrisBlock.src = `../assets/images/tetris/${i}.png`
+            tetrisBlock.className = `tetris_block_${i}`;
+            $tetris.appendChild(tetrisBlock);
+        }
+    }
 
+    const init = () => {
+        buildTetris()
+        
         answer1.addEventListener('click', () => {
             clickA()
         })
@@ -151,6 +162,7 @@
             $prevBtn.disabled = false
             mbti_list[num] = mbti_value
             console.log(mbti_list)
+            
             
             if ($answer1.classList["value"] == "answer1 click") {
                 $answer1.classList.toggle('click')
@@ -170,7 +182,6 @@
                 
                 $nextBtn.disabled = true
             }
-            
         })
 
         $prevBtn.addEventListener('click', () => {
@@ -192,5 +203,6 @@
         
     }
     init()
+    console.log(Object.keys(q))
   })()
   
