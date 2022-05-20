@@ -99,8 +99,8 @@
 
 
 .ready_button:hover {
-    /* -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s; */
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
 }
 
 .start_button {
@@ -201,7 +201,7 @@
     border-radius: 5px;
 }
 
-.button.show:after {
+.button.show::before {
     display: block;
     content: "";
     position: absolute;
