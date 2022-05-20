@@ -33,11 +33,11 @@ body {
 }
 
 .display {
-    background-color: #404040;
+    background-color: #1f1f1f;
     color: #fff;
     font-weight: lighter;
     font-size: 12px;
-    display: flex;
+    display: block;
     justify-items: center;
     width: 8.1cm;
     height: 100%;
@@ -53,7 +53,18 @@ body {
     height: 3cm;
 }
 
+.cross.none {
+    display: none;
+    transition-duration: 2s;
+}
+
+.buttons.none {
+    display: none;
+    transition-duration: 2s;
+}
+
 .cross {
+    display: block;
     background: gray;
     position: relative;
     width: 0.8cm;
@@ -127,4 +138,12 @@ body {
         width: 6.6cm;
         height: 11.12cm;
     }
+}
+
+.test_result {
+    display: none;
+}
+
+.question_page {
+    display: none;
 }
