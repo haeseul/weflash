@@ -27,7 +27,7 @@
         18: {"title": "문제 19번", "mbti_type": "JP", "A": "J", "B": "P"},
         19: {"title": "문제 20번", "mbti_type": "EI", "A": "E", "B": "I"},
     }
-    
+
     const get = (target) => {
         return document.querySelector(target)
     }
@@ -140,16 +140,35 @@
     const buildTetris = () => {
         // 테트리스 블록 추가하기
         for (let i = 20; i >= 1; i--) {
-            const tetrisBlock = document.createElement('img');
+            const tetrisBlock = document.createElement('img')
             tetrisBlock.src = `../assets/images/tetris/${i}.png`
-            tetrisBlock.className = `tetris_block_${i}`;
-            $tetris.appendChild(tetrisBlock);
+            tetrisBlock.className = `tetris_block_${i} none`
+            $tetris.appendChild(tetrisBlock)
         }
+    }
+    
+    const tetrisFall = () => {
+        const $tetrisBlock = get(`.tetris_block_${num}`)
+        $tetrisBlock.style.marginButtom = 80 + 'px'
+        console.log($tetrisBlock)
+        $tetrisBlock.classList.toggle('none')
+    }
+
+    const tetrisUndo = () => {
+        const $tetrisBlock = get(`.tetris_block_${num+1}`)
+        console.log($tetrisBlock)
+        $tetrisBlock.classList.toggle('none')
+    }
+
+    const tetrisLast = () => {
+        const $tetrisBlock = get('.tetris_block_20')
+        console.log($tetrisBlock)
+        $tetrisBlock.classList.toggle('none')
     }
 
     const init = () => {
         buildTetris()
-        
+
         answer1.addEventListener('click', () => {
             clickA()
         })
@@ -163,7 +182,6 @@
             mbti_list[num] = mbti_value
             console.log(mbti_list)
             
-            
             if ($answer1.classList["value"] == "answer1 click") {
                 $answer1.classList.toggle('click')
             }
@@ -172,16 +190,20 @@
             }
             
             if (num == 19) {
+                tetrisLast()
                 cal()
                 $questionPage.classList.toggle('show')
                 $resultPage.classList.toggle('show')
                 $nextBtn.disabled = true
+                $tetris.style.display = "none"
             } else {
                 num++
                 test()
                 
                 $nextBtn.disabled = true
             }
+
+            tetrisFall()
         })
 
         $prevBtn.addEventListener('click', () => {
@@ -199,10 +221,11 @@
             } else {
                 $nextBtn.disabled = true
             }
+
+            tetrisUndo()
         })
         
     }
     init()
-    console.log(Object.keys(q))
   })()
   

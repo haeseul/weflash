@@ -1,5 +1,6 @@
 .question_page {
     display: none;
+    z-index: 100;
 }
 
 .question_page.show {
@@ -73,6 +74,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    background-color: #404040;
     border: 1px solid #FFE669;
     border-radius: 10px;
     width: 200px;
@@ -84,7 +86,7 @@
 .answer1_text::after{
     position: absolute;
     content: "";
-    top: -6px;
+    top: -7px;
     left: 30px;
     width: 11px;
     height: 11px;
