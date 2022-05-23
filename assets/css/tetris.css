@@ -2,13 +2,17 @@
     position: relative;
 }
 
+.tetris.none {
+    display: none;
+}
+
 .tetris {
     position: absolute;
     width: 6.7cm;
     height: 12.2cm;
     overflow: auto;
     bottom: calc(100% - 13cm);
-    /* z-index: -1; */
+    /* z-index: 0; */
 }
 
 .tetris img {
@@ -55,10 +59,10 @@
 }
 
 .tetris img.none {
-    animation: fadeout 2s;
-    -moz-animation: fadeout 2s; /* Firefox */
-    -webkit-animation: fadeout 2s; /* Safari and Chrome */
-    -o-animation: fadeout 2s; /* Opera */
+    animation: fadeout 2.5s;
+    -moz-animation: fadeout 2.5s; /* Firefox */
+    -webkit-animation: fadeout 2.5s; /* Safari and Chrome */
+    -o-animation: fadeout 2.5s; /* Opera */
     animation-fill-mode: forwards;
 }
 

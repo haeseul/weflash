@@ -25,6 +25,7 @@
     const $mainPage = get('.main_page')
     const $prevBtn = get('.prev_button')
     const $nextBtn = get('.next_button')
+    const $tetris = get('.tetris')
 
     const gameReady = () => {
         $coinImg.classList.toggle('show')
@@ -49,7 +50,6 @@
         // $button.classList.toggle('show')
         $buttons.classList.toggle('none')
         $cross.classList.toggle('none')
-
     }
 
     const startGame = () => {
@@ -59,6 +59,7 @@
 
     const gameStart = () => {
         $mainPage.classList.toggle('none')
+        $tetris.classList.toggle('none')
         $questionPage.classList.toggle('show')
         $display.classList.toggle('show')
         $display.classList.toggle('start')
@@ -78,8 +79,8 @@
             gameStart()
         })
     }
-    //init()
-    gameReady()
-    gameStart()
+    init()
+    // gameReady()
+    // gameStart()
   })()
   
