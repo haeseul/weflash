@@ -194,3 +194,48 @@
     }
 }
 
+.roading .roading_txt {
+    font-size: 35px;
+    font-weight: 900;
+    color: #FFE669;
+    transition: transform 0.5s ease 0s;
+    animation: roading_txt_ani;
+    animation-duration: 3s;
+}
+
+.roading .roading_img {
+    position: absolute;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFE669;
+    top: 60%;
+    left: 0;
+    animation: roading_img_ani;
+    animation-duration: 5s;
+}
+
+.man_img {
+    width: 15px;
+}
+
+
+@keyframes roading_txt_ani {
+    from {
+        margin-top: 150px;
+    }
+
+    to {
+        margin-top: 220px;
+    }
+}
+
+@keyframes roading_img_ani {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 160px;
+    }
+}
