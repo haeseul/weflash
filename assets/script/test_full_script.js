@@ -49,7 +49,7 @@
         for (let index = 1; index <= 16; index++) {
             const carouselItem = document.createElement('div');
             const carouselImage = document.createElement('img');
-            carouselImage.src = `https://via.placeholder.com/190x120?text=img${index}`;
+            carouselImage.src = `../assets/images/mbti_games/${index}.png`;
             carouselItem.className = 'carousel_cell';
             carouselItem.appendChild(carouselImage);
             carousel.appendChild(carouselItem);
