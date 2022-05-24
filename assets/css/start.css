@@ -28,6 +28,7 @@
     height: 100%;
     background-color: #404040;
     transition-duration: 1s;
+    z-index: 10;
 }
 
 .display.start {
@@ -99,11 +100,8 @@
 
 
 .ready_button:hover {
-    text-shadow: 0px 3px 5px #909090;
-    transform: translateY(-0.25em);
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-    cursor: pointer;
 }
 
 .start_button {
@@ -118,14 +116,6 @@
     font-size: 20px;
     font-weight: 700;
     transition-duration: 1s;
-}
-
-.start_button:hover {
-    text-shadow: 0px 3px 5px #909090;
-    transform: translateY(-0.25em);
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
 }
 
 .first_control {
@@ -233,7 +223,7 @@
     display: block;
     position: relative;
     width: 1.5cm;
-    margin-left: 11cm;
+    margin-left: 7.5cm;
     transition-delay: 0.2s;
     transition-duration: 0.5s;
 }
