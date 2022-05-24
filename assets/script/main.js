@@ -9,13 +9,11 @@
     // const $gameStart = get('.game_start')
     const $question = get('.question')
     const $start = get('.start')
-    const $A = get('#A')
     const $buttons = get('.buttons')
     const $cross = get('.cross')
     const $firstCross = get('.first_cross')
     const $firstButtons = get('.first_buttons')
     const $display = get('.display')
-    const $main = get('.main')
     const $title = get('.title')
     const $button = get('.button')
     const $coin = get('.coin')
@@ -23,8 +21,6 @@
     const $startBtn = get('.start_button')
     const $questionPage = get('.question_page')
     const $mainPage = get('.main_page')
-    const $prevBtn = get('.prev_button')
-    const $nextBtn = get('.next_button')
     const $tetris = get('.tetris')
 
     const gameReady = () => {
