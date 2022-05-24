@@ -1,6 +1,18 @@
+.display {
+    position: relative;
+}
+
+.tetris {
+    position: absolute;
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
+    overflow: auto;
+    top: 14px;
+    left: 14px;
+}
+
 .question_page {
     display: none;
-    z-index: 100;
 }
 
 .question_page.show {
@@ -24,6 +36,7 @@
 }
 
 .question_icon {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: start; 
@@ -74,7 +87,6 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: #404040;
     border: 1px solid #FFE669;
     border-radius: 10px;
     width: 200px;
@@ -86,7 +98,7 @@
 .answer1_text::after{
     position: absolute;
     content: "";
-    top: -7px;
+    top: -6px;
     left: 30px;
     width: 11px;
     height: 11px;
@@ -194,3 +206,48 @@
     }
 }
 
+.roading .roading_txt {
+    font-size: 35px;
+    font-weight: 900;
+    color: #FFE669;
+    transition: transform 0.5s ease 0s;
+    animation: roading_txt_ani;
+    animation-duration: 3s;
+}
+
+.roading .roading_img {
+    position: absolute;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFE669;
+    top: 60%;
+    left: 0;
+    animation: roading_img_ani;
+    animation-duration: 5s;
+}
+
+.man_img {
+    width: 15px;
+}
+
+
+@keyframes roading_txt_ani {
+    from {
+        margin-top: 150px;
+    }
+
+    to {
+        margin-top: 220px;
+    }
+}
+
+@keyframes roading_img_ani {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 160px;
+    }
+}
