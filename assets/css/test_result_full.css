@@ -5,6 +5,7 @@
 }
 
 .test_result_full {
+    background-color: #404040;
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -153,6 +154,7 @@
 }
 
 .share {
+    background-color: #404040;
     display: flex;
     align-items: center;
     justify-content: center;
