@@ -2,11 +2,29 @@
     display: none;
 }
 
+:root {
+    /* color: var(--neon-pink); 형식으로 사용하면 됨! */
+    --neon-pink: #FF8AF0;
+    --neon-blue: #75FFFF;
+    --neon-yellow: #FFF990;
+    --neon-green: #E3FF6D;
+}
+
+@font-face {
+    font-family: 'nanumSquare';
+    src: url(../fonts/NANUMSQUARER.TTF);    
+}
+@font-face {
+    font-family: 'neoDGM';
+    src: url(../fonts/NEODGM.TTF);    
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'nanumSquare';
     width: 100%;
     height: 100vh;
     margin: 0px;
@@ -109,14 +127,17 @@ body {
 .prev_button {
     top: -1cm;
     left: -2cm;
+    font-family: 'neoDGM';
 }
 
 .next_button {
     top: -1cm;
+    font-family: 'neoDGM';
 }
 
 .fullpage_button {
     left: -1cm;
+    font-family: 'neoDGM';
 }
 
 .prev_button:disabled, .next_button:disabled {
