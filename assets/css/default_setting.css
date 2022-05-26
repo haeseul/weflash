@@ -108,21 +108,25 @@ body {
     transition-duration: 2s;
 }
 
-.cross {
+.cross , .cross:hover {
     display: block;
-    background: gray;
     position: relative;
     width: 0.8cm;
     height: 2cm;
+    background-color: #404040;
+    box-shadow: 0 0 6px var(--neon-green), 0 0 24px var(--neon-green), 0 0 13px var(--neon-green), 0 0 9px var(--neon-green),
+                0 0 49px var(--neon-green), 0 0 51px var(--neon-green), 0 0 76px var(--neon-green), 0 0 59px var(--neon-green)
+    
 }
+
 .cross:after {
-    background: gray;
     content: "";
     position: absolute;
     width: 2cm;
     height: 0.8cm;
     left: -0.6cm;
     top: 0.6cm;
+    background-color: #404040;
 }
 
 .buttons {
@@ -139,33 +143,45 @@ body {
     margin: 0;
     border: none;
     font-size: 12px;
+    color: #fff;
+    font-weight: 600;
     border-radius: 100%;
     cursor: pointer;
+    background-color: #404040;
 }
 
 .prev_button:hover, .prev_button:focus,
 .next_button:hover, .next_button:focus,
 .fullpage_button:hover, .fullpage_button:focus,
 .cross:hover, .cross:hover {
-    box-shadow: 0 0.5em 0.5em -0.4em #404040;
     transform: translateY(-0.25em);
 }
 
-.prev_button {
+.prev_button, .prev_button:hover {
     top: -1cm;
     left: -2cm;
+    border: 2px solid var(--neon-yellow);
+    box-shadow: 0 0 4px #fff, 0 0 1px #fff, 0 0 3px #fff, 0 0 7px var(--neon-yellow),
+    0 0 49px var(--neon-yellow), 0 0 45px var(--neon-yellow), 0 0 1px var(--neon-yellow), 0 0 15px var(--neon-yellow);
     font-family: 'neoDGM';
 }
 
-.next_button {
+.next_button, .next_button:hover {
     top: -1cm;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 4px #fff, 0 0 1px #fff, 0 0 3px #fff, 0 0 7px var(--neon-blue),
+    0 0 49px var(--neon-blue), 0 0 45px var(--neon-blue), 0 0 1px var(--neon-blue), 0 0 15px var(--neon-blue);
     font-family: 'neoDGM';
 }
 
-.fullpage_button {
+.fullpage_button, .fullpage_button:hover {
     left: -1cm;
+    border: 2px solid var(--neon-pink);
+    box-shadow: 0 0 4px #fff, 0 0 1px #fff, 0 0 3px #fff, 0 0 7px var(--neon-pink),
+    0 0 49px var(--neon-pink), 0 0 45px var(--neon-pink), 0 0 1px var(--neon-pink), 0 0 15px var(--neon-pink);
     font-family: 'neoDGM';
 }
+
 
 .prev_button:disabled, .next_button:disabled {
     box-shadow: none;
