@@ -20,6 +20,7 @@
 }
 
 body {
+    background-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +28,7 @@ body {
     font-family: 'nanumSquare';
     width: 100%;
     height: 100vh;
-    margin: 0px;
+    margin: auto;
     -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -35,10 +36,23 @@ body {
 }
 
 .parent {
+    position: relative;
     display: flex;
     flex-direction: column;
-    border: 1px solid yellowgreen;
     padding: 0.55cm 0.275cm 0 0.275cm;
+}
+
+.parent::after {
+    position: absolute;
+    content: '';
+    display: flex;
+    border: 2px solid var(--neon-pink);
+    box-shadow: 0 0 5px 5px var(--neon-pink);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.55cm;
+    z-index: 100;
 }
 
 .child {
@@ -47,7 +61,10 @@ body {
     justify-content: center;
     width: 20cm;
     height: 13.72cm;
-    border: 1px solid red;
+    border-left: 2px solid var(--neon-blue);
+    border-right: 2px solid var(--neon-blue);
+    box-shadow: 0 0px 0px 0px #f0f1f5, 0 0px 0px 0px #f0f1f5, 8px 0 8px -2px var(--neon-blue), -8px 0 8px -2px var(--neon-blue);
+    margin-top: 8px;
 }
 
 .display {
@@ -62,13 +79,23 @@ body {
 }
 
 .control {
-    background-color: gainsboro;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 3cm;
+    z-index: 100;
+}
+
+.control::before {
+    position: absolute;
+    content: '';
+    border: 2px solid var(--neon-pink);
+    box-shadow: 0 0 5px 5px var(--neon-pink);
+    width: 100%;
+    height: 3cm;
+    margin-top: 9px;
 }
 
 .cross.none {

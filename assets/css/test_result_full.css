@@ -1,7 +1,8 @@
 .display {
     display: inline-block;
     flex-direction: column;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .test_result_full {
