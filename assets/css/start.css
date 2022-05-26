@@ -44,8 +44,9 @@
 }
 
 .title {
-    color: #ffffff;
-    font-weight: 700;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px rgb(241 51 212), 
+    0 0 100px rgb(241 51 212), 0 0 10px rgb(241 51 212), 0 0 100px rgb(241 51 212), 0 0 10px rgb(241 51 212);
+    font-weight: 900;
     text-align: center;
     margin-top: 30%;
     font-size: 20px;
@@ -95,9 +96,26 @@
     color: #ffffff;
     font-size: 20px;
     font-weight: 800;
+    animation: flicker 1.5s infinite alternate;
 }
 
-
+@keyframes flicker {
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+      text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 3px #fff, 0 0 9px rgb(241 51 212),
+        0 0 23px #fff, 0 0 45px #fff, 0 0 75px #fff, 0 0 32px #fff;
+    }
+    20%,
+    24%,
+    55% {
+      text-shadow: none;
+    }
+  }
 
 .ready_button:hover {
     text-shadow: 0px 3px 5px #909090;
@@ -105,6 +123,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+    animation: none;
 }
 
 .start_button {
@@ -115,9 +134,10 @@
     border: 0;
     border-radius: 10px;
     padding: 5px;
-    color: #ffffff;
+    color: #fff;
+    animation: flicker 1.5s infinite alternate;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     transition-duration: 1s;
 }
 
@@ -127,6 +147,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+    animation: none;
 }
 
 .first_control {
