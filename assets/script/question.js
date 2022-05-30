@@ -56,8 +56,6 @@
     const question = get('.question')
     const answer1_text = get('.answer1_text')
     const answer2_text = get('.answer2_text')
-    const answer1 = get('.answer1')
-    const answer2 = get('.answer2')
     const $nextBtn = get('.next_button')
     const $prevBtn = get('.prev_button')
     const $questionPage = get('.question_page')
@@ -100,13 +98,16 @@
         } else if (q[num]["mbti_type"] == "EI") {
             mbti_value = "E"
         }
-
         
         if ($answer2.classList["value"] == "answer2 click") {
             $answer2.classList.toggle('click')
             $answer1.classList.toggle('click')
         } else if ($answer1.classList["value"] == "answer1") {
             $answer1.classList.toggle('click')
+        }
+
+        if ($answer1.classList["value"] == "answer1 click") {
+            enterEvent()
         }
     }
 
@@ -129,14 +130,12 @@
             mbti_value = "I"
         }
 
-        
         if ($answer1.classList["value"] == "answer1 click") {
             $answer1.classList.toggle('click')
             $answer2.classList.toggle('click')
         } else if ($answer2.classList["value"] == "answer2") {
             $answer2.classList.toggle('click')
         }
-        
     }
 
     function getCount(mbti_list) {
@@ -189,61 +188,73 @@ let mbti = "";
     const tetrisFall = () => {
         const $tetrisBlock = get(`.tetris_block_${num}`)
         $tetrisBlock.style.marginButtom = 80 + 'px'
-        console.log($tetrisBlock)
         $tetrisBlock.classList.toggle('none')
     }
 
     const tetrisUndo = () => {
         const $tetrisBlock = get(`.tetris_block_${num+1}`)
-        console.log($tetrisBlock)
         $tetrisBlock.classList.toggle('none')
     }
 
     const tetrisLast = () => {
         const $tetrisBlock = get('.tetris_block_20')
-        console.log($tetrisBlock)
         $tetrisBlock.classList.toggle('none')
+    }
+
+    const nextStep = () => {
+        $prevBtn.disabled = false
+        mbti_list[num] = mbti_value
+        console.log(mbti_list)
+        
+        if ($answer1.classList["value"] == "answer1 click") {
+            $answer1.classList.toggle('click')
+        }
+        if ($answer2.classList["value"] == "answer2 click") {
+            $answer2.classList.toggle('click')
+        }
+        
+        if (num == 19) {
+            tetrisLast()
+            cal()
+            $questionPage.classList.toggle('show')
+            $roading.classList.toggle('none')
+            $nextBtn.disabled = true
+            setTimeout(result_show, 3000)
+            $tetris.style.display = "none"
+        } else {
+            num++
+            console.log(num)
+            test()
+            
+            $nextBtn.disabled = true
+        }
+
+        tetrisFall()
+    }
+
+    const enterEvent = () => {
+        document.addEventListener('keyup', (e) => {
+            if ('Enter' === e.key) {
+                nextStep()
+            }
+        })
     }
 
     const init = () => {
         buildTetris()
 
-        answer1.addEventListener('click', () => {
+        $answer1.addEventListener('click', () => {
             clickA()
+            // enterEvent()
         })
 
-        answer2.addEventListener('click', () => {
+        $answer2.addEventListener('click', () => {
             clickB()
+            // enterEvent()
         })
 
         $nextBtn.addEventListener('click', () => {
-            $prevBtn.disabled = false
-            mbti_list[num] = mbti_value
-            console.log(mbti_list)
-            
-            if ($answer1.classList["value"] == "answer1 click") {
-                $answer1.classList.toggle('click')
-            }
-            if ($answer2.classList["value"] == "answer2 click") {
-                $answer2.classList.toggle('click')
-            }
-            
-            if (num == 19) {
-                tetrisLast()
-                cal()
-                $questionPage.classList.toggle('show')
-                $roading.classList.toggle('none')
-                $nextBtn.disabled = true
-                setTimeout(result_show, 3000)
-                $tetris.style.display = "none"
-            } else {
-                num++
-                test()
-                
-                $nextBtn.disabled = true
-            }
-
-            tetrisFall()
+            nextStep()
         })
 
         $prevBtn.addEventListener('click', () => {
