@@ -85,11 +85,15 @@
       gameLimit[num] = true   // 정답인 숫자가 있다면 true
     })
     
+    console.log("trial = ", trial)
     nums.map((num, index) => {
       // 자리에 해당하는 값은 아니지만 && 정답인 숫자가 있다
       if (answer[index] !== num && !!gameLimit[num]) {
         ball++
-      }
+        console.log("index + 4 * (trial - 1) = ", index + 4 * (trial - 1))
+        console.log($question.childNodes[`${index + 4 * (trial - 1)}`].innerText)
+        $question.childNodes[`${index + 4 * (trial - 1)}`].style.backgroundColor = "rgb(255, 230, 0)"
+        }
     })
     return ball
   }
@@ -134,9 +138,13 @@
         numsDiv.innerText = `${num}`
         $question.appendChild(numsDiv)
       })
+      // console.log(document.querySelector('.ball_question :nth-child(1)').innerText)
+      // console.log(document.querySelector('.ball_question :nth-child(2)'))
+      // console.log(document.querySelector('.ball_question :nth-child(3)'))
+      // console.log(document.querySelector('.ball_question :nth-child(4)'))
 
       const result = onPlayed(inputNumber, getResults(inputNumber, password))
-      $question.innerHTML += `<span>${result}</span>`
+      // $question.innerHTML += `<span>${result}</span>`
 
       if (limit <= trial && !isCorrect(inputNumber, password)) {
         alert('쓰리아웃!')

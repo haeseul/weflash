@@ -68,10 +68,11 @@ section {
 }
 
 .numsDiv {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  background-color: gray;
+  border-radius: 2px;
+  padding: 20px;
+  margin: 5px;
 }
 
 form {
