@@ -126,6 +126,15 @@
       alert('중복 숫자가 있습니다.')
     } else {
       trial++
+
+      const nums = inputNumber.split('')
+      nums.map((num) => {
+        const numsDiv = document.createElement('div')
+        numsDiv.classList.add('numsDiv')
+        numsDiv.innerText = `${num}`
+        $question.appendChild(numsDiv)
+      })
+
       const result = onPlayed(inputNumber, getResults(inputNumber, password))
       $question.innerHTML += `<span>${result}</span>`
 

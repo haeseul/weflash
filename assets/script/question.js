@@ -105,10 +105,6 @@
         } else if ($answer1.classList["value"] == "answer1") {
             $answer1.classList.toggle('click')
         }
-
-        if ($answer1.classList["value"] == "answer1 click") {
-            enterEvent()
-        }
     }
 
 
