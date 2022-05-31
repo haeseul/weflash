@@ -44,9 +44,12 @@
   }
 
 
-  // 시도를 했을 때 number: 내가 입력한 숫자, hint: 현재 어떤 상황?
-  const onPlayed = (number, hint) => {
-    return `<em>${trial}차 시도</em>: ${number}, ${hint}`
+  const showPassword = () => {
+    end = true
+    $answer.innerHTML =  baseball.password
+    $answer.style.backgroundColor = "#EC994B"
+    $answer.style.border = "none"
+    $answer.style.color = "white"
   }
 
 
@@ -54,6 +57,7 @@
   const isCorrect = (number, answer) => {
     return number === answer
   }
+
 
   // 중복번호가 있는가?
   const isDuplicate = (number) => {
@@ -68,12 +72,15 @@
     const nums = number.split('') // 4자리 number를 분리해 배열로 생성
 
     nums.map((digit, index) => {  // map으로 새로운 배열 생성
+      const numIndex = index + 4 * (trial - 1)
       if (digit === answer[index]) {
         strike++
+        $question.childNodes[`${numIndex}`].style.backgroundColor = "#BABD42"
       }
     })
     return strike
   }
+
 
   // 볼 카운트
   const getBalls = (number, answer) => {
@@ -85,24 +92,30 @@
       gameLimit[num] = true   // 정답인 숫자가 있다면 true
     })
     
-    console.log("trial = ", trial)
     nums.map((num, index) => {
+      const numIndex = index + 4 * (trial - 1)
       // 자리에 해당하는 값은 아니지만 && 정답인 숫자가 있다
       if (answer[index] !== num && !!gameLimit[num]) {
         ball++
-        console.log("index + 4 * (trial - 1) = ", index + 4 * (trial - 1))
-        console.log($question.childNodes[`${index + 4 * (trial - 1)}`].innerText)
-        $question.childNodes[`${index + 4 * (trial - 1)}`].style.backgroundColor = "rgb(255, 230, 0)"
+        $question.childNodes[`${numIndex}`].style.backgroundColor = "#EFD345"
         }
     })
     return ball
   }
 
+
   // 시도 결과
   const getResults = (number, answer) => {
     if (isCorrect(number, answer)) {
-      end = true
-      $answer.innerHTML =  baseball.password
+      showPassword()
+      
+      const nums = number.split('')
+      nums.map((digit, index) => {
+        const numIndex = index + 4 * (trial - 1)
+        if (digit === answer[index]) {
+          $question.childNodes[`${numIndex}`].style.backgroundColor = "#EC994B"
+        }
+      })
       return '홈런!!'
     }
 
@@ -125,10 +138,11 @@
     const {password} = baseball
 
     if (inputNumber.length !== digit) {
-      alert(`${digit}자리 숫자를 입력해주세요.`)
+      $answer.innerText = `${digit}자리 숫자를\n입력해주세요.`
     } else if (isDuplicate(inputNumber)) {
-      alert('중복 숫자가 있습니다.')
+      $answer.innerText = '중복 숫자가\n있습니다.'
     } else {
+      $answer.innerText = '정답은?'
       trial++
 
       const nums = inputNumber.split('')
@@ -138,18 +152,12 @@
         numsDiv.innerText = `${num}`
         $question.appendChild(numsDiv)
       })
-      // console.log(document.querySelector('.ball_question :nth-child(1)').innerText)
-      // console.log(document.querySelector('.ball_question :nth-child(2)'))
-      // console.log(document.querySelector('.ball_question :nth-child(3)'))
-      // console.log(document.querySelector('.ball_question :nth-child(4)'))
 
-      const result = onPlayed(inputNumber, getResults(inputNumber, password))
-      // $question.innerHTML += `<span>${result}</span>`
+      getResults(inputNumber, password)
 
       if (limit <= trial && !isCorrect(inputNumber, password)) {
         alert('쓰리아웃!')
-        end = true
-        $answer.innerHTML = password
+        showPassword()
       }
     }
     $input.value=''
