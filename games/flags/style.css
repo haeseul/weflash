@@ -11,6 +11,52 @@ main {
   background-color: rgb(229, 229, 229);
 }
 
+.start {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    z-index: 2;
+}
+
+.start.hide {
+    display: none;
+}
+
+.start_button {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 150px;
+    height: 100px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border: none;
+    border-radius: 20px;
+    transform: translateX(-50%) translateY(-50%);
+    box-shadow: 1px 5px 0 rgb(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.start_button:hover {
+    color: white;
+    background-color: rgb(3, 130, 176);
+}
+
+.start_button:active {
+    position: relative;
+    top: 49%;
+    /* transform: translateY(-2px); */
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}
+
+
 h1 {
   margin:50px;
   font-size: 30px;
@@ -35,6 +81,24 @@ section {
     border: 1px solid gray;
     width: 500px;
     height: 100px;
+}
+
+
+.progressbar {
+    margin-top: 10px;
+    width: 240px;
+    height: 20px;
+    border-radius: 30px;
+    background-color: #ddd;
+}
+
+.bar {
+    margin: 0;
+    width: 240px;
+    height: 20px;
+    border-radius: 30px;
+    background-color: rgb(3, 130, 176);
+
 }
 
 .characters {
@@ -75,6 +139,7 @@ section {
     color: white;
     box-shadow: 0 10px 15px gray;
     transform: rotate(-20deg);
+    transition-duration: 0.3s;
     cursor: pointer;
     /* z-index: 100; */
 }
@@ -99,6 +164,7 @@ section {
     color:rgb(0, 97, 132);
     box-shadow: 0 10px 15px gray;
     transform: rotate(20deg);
+    transition-duration: 0.3s;
     cursor: pointer;
     /* z-index: 100; */
 }
@@ -113,10 +179,8 @@ section {
     right: 80px;
 }
 
-.left_button:hover,
-.right_button:hover,
-.left_button:active,
-.right_button:active {
+.left_button.click,
+.right_button.click {
     transform: translateY(-10px);
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
 }
