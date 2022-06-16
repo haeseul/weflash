@@ -1,0 +1,1432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+
+	<script data-ad-client="ca-pub-3048894023340513" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173628111-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-173628111-1');
+	</script>
+
+	<meta charset="UTF-8">
+	<meta name="NaverBot" content="All"/>
+	<meta name="NaverBot" content="index,follow"/>
+	<meta name="Yeti" content="All"/>
+	<meta name="Yeti" content="index,follow"/>
+	<meta name="Subject" content="청기백기 순발력테스트" />
+	<title>순발력 테스트 청기백기</title>
+	<link rel="canonical" href="https://mnmsoft.co.kr/content/chung">
+	<meta property="og:type" content = "website">
+	<meta property="og:url" content = "mnmsoft.co.kr/content/chung">
+	<meta property="og:title" content = "순발력테스트 청기백기">
+	<meta property="og:description" content = "순발력테스트 청기백기. 60초 동안 주어진 미션에 따라 청기백기를 조작하여 점수를 획득해보세요.">
+	<!-- <meta property="og:image" content = "./images/opengrape.png"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="순발력테스트 청기백기">
+	<meta name="Description" content="순발력테스트 청기백기. 60초 동안 주어진 미션에 따라 청기백기를 조작하여 점수를 획득해보세요.">
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/common/js/common.js?version=20160728"></script>
+<link rel="stylesheet" href="/common/css/common.css?version=20180611">
+<script src="https://kit.fontawesome.com/f2e1945667.js" crossorigin="anonymous"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		Kakao.init("545222313ce7bfd691b246b62bec45a1");
+		Kakao.isInitialized();
+	</script>
+
+		<script>
+
+
+			// function preloading (imageArray) 
+			// { 
+			// 	let n = imageArray.length; 
+			// 	for (let i = 0; i < n; i++) { 
+			// 		let img = new Image(); 
+			// 		img.src = imageArray[i]; 
+			// 	} 
+			// } 
+			// preloading([ './images/2u.png', './images/2u-1.png', './images/bu.png' , './images/bu-1.png' , './images/cu.png' , './images/cu-1.png' , './images/d.png' , './images/d-1.png' , './images/end.png' , './images/s.png' , './images/s-1.png' , './images/s2u.png' , './images/s2u-1.png' , './images/sbu.png' , './images/sbu-1.png' , './images/scu.png' , './images/scu-1.png' , './images/win2.gif' , './images/yes.png'])
+
+
+
+			var i = 0;
+			var txt = "청기올리지 말고 백기 내려!"; /* The text */
+			var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+			var names = ["청기","백기",""];
+			var blueAction = ["들어","내려"];
+			var blueDoubleAction = ["들고","내리고"];
+			var blueFakeAction = ["들지말고","내리지말고"];
+			var whiteAction = ["들어","내려"];
+			var whiteDoubleAction = ["들고","내리고"];
+			var whiteFakeAction = ["들지말고","내리지말고"];
+			var sitAction = ["앉아","일어서"];
+			var sitDoubleAction = ["앉고","일어서고"];
+			var sitFakeAction = ["앉지말고","일어서지말고"];
+
+			var blueflag = 0;
+			var whiteflag = 0;
+			var sit = 0;
+
+			var missionBlueflag = 0;
+			var missionWhiteflag = 0;
+			var missionSit = 0;
+
+
+
+			// ex) 1. name + action			
+			//	   2. name + fackaction + othername + action
+			//     조건 name에 해당하는 flag가 0일때 1번actoin만 가능 , 1일때 2번action만 가능
+			//     
+
+
+			// 처음가능한 미션.
+			// 1action
+			// 청기들어
+			// 백기들어
+			// 앉아
+			// 2action
+			// 청기들고 백기들어
+			// 청기들고 앉아
+			// 백기들고 앉아
+			// fakeaction
+			// 청기들지말고 백기들어
+			// 청기들지말고 앉아
+			// 백기들지말고 청기들어
+			// 백기들지말고 앉아
+			// 앉지말고 청기들어
+			// 앉지말고 백기들어
+
+			//청기가 들려있는상태에서가능한 미션.
+			//1action
+			//청기내려
+			//백기들어
+			//앉아
+			//청기내리고 백기들어
+			//청기내리고 앉아
+			//백기들고 앉아
+			//
+
+
+
+			function typeWriter() {
+			  if (i < txt.length) {
+				$("#mission").html($("#mission").html() + txt.charAt(i));
+				i++;
+				setTimeout(typeWriter, speed);
+			  }
+			}
+
+
+			var missionStr = "";
+			var arrMissionStr = [];
+			var actionCount = 0;
+			
+			arrMissionStr.push("앉아");
+			arrMissionStr.push("청기");
+
+
+			function loop(){
+
+
+				if (gameOn == 0)
+					return;
+
+				drawState();
+				$("#characterno").css("display","none");
+				$("#characteryes").css("display","none");
+				
+				$(".playBtn").css("visibility","visible");
+				drawState();
+				actionCount = 0
+	
+
+				makeNextMission();
+				clearInterval(myInterval);
+				xEndPlayPos = 185; // 
+				 myInterval = setInterval(function () {
+					draw();
+				}, 100) // 10 * x = 15번 호출되면 3초. 1초에 10번 호출됨.  3초에 30번 호출됨
+				// 170번 호출되며 되면 됨.
+				// 170 / 30 하여 3초 맞춤!
+				tikSound.currentTime=0;
+				
+			}
+
+
+			function endTimer(){
+
+
+			  // 271 ~ 630 까지 돌리기
+			  // 5.98 을 60번 
+
+			  /*
+			  if (alltimeflagval <= 630 ){
+				  drawAllTimer();
+			  }
+   			  alltimeflagval = alltimeflagval + 5.98;
+			  */
+			  
+
+
+
+			  if($("#timer").html() - 1 > 0){
+  			    $('#timer').html($("#timer").html() - 1);
+				$(".alltime").animate({'right':(-3)+'px'},20)
+				   .animate({'right':(+3)+'px'},20)
+				   .animate({'right':(-3)+'px'},20)
+				   .animate({'right':(+3)+'px'},20)
+				   .animate({'right':(0)+'px'},20);
+				
+			  }else {
+ 			    $('#timer').html(0);
+				stop();
+			  }
+				
+			}
+
+			function end(){
+				clearInterval(myInterval);
+				clearInterval(endtimer);
+				clearTimeout(wrongloop);
+				gameOn = 0;
+				tikSound.pause(); //전체타이머 멈출때 끝남!
+				//gameoverSound.play();
+
+
+				//점수 팝업 띄우기!
+
+				setTimeout(function(){
+					$(".startBtn").css("visibility","visible");
+				}, 1500);
+				
+
+
+				$(".playBtn").css("visibility","hidden");
+				$(".text").html("0");
+				$(".outer1").css("animation-name","no");
+				$(".outer2").css("animation-name","no");
+				$(".outer3").css("animation-name","no");
+				$(".outerofouter1").css("animation-name","no");
+				$(".outerofouter2").css("animation-name","no");
+				$(".outerofouter3").css("animation-name","no");
+			}
+
+			function stop(){
+				clearInterval(myInterval);
+				clearInterval(endtimer);
+				clearTimeout(wrongloop);
+				gameOn = 0;
+				tikSound.pause(); //전체타이머 멈출때 끝남!
+				gameoverSound.play();
+
+
+				//점수 팝업 띄우기!
+				
+				setTimeout(function(){
+					$("#popvs").show();
+				}, 1000);
+
+
+				$("#point2").html($("#point").html() + "점");
+
+				
+
+				setTimeout(function(){
+					$(".startBtn").css("visibility","visible");
+				}, 1500);
+				
+
+
+				$(".playBtn").css("visibility","hidden");
+				$(".text").html("0");
+				$(".outer1").css("animation-name","no");
+				$(".outer2").css("animation-name","no");
+				$(".outer3").css("animation-name","no");
+				$(".outerofouter1").css("animation-name","no");
+				$(".outerofouter2").css("animation-name","no");
+				$(".outerofouter3").css("animation-name","no");
+			}
+
+			function chung(flag){
+
+				if(flag ==1){
+					$(".btn_cu").attr("src","./images/btn_cuo.png");
+					setTimeout(function(){
+						$(".btn_cu").attr("src","./images/btn_cu.png");
+					},100);
+				}else{
+					$(".btn_cd").attr("src","./images/btn_cdo.png");
+					setTimeout(function(){
+						$(".btn_cd").attr("src","./images/btn_cd.png");
+					},100);
+				}
+
+				actionCount += 1;
+				blueflag = flag
+				drawState();
+
+				if(actionKind == 1 && actionCount < 2){
+					//console.log("2action 대기 아무것도안함")
+				}else{
+					//console.log(blueflag + "/" + missionBlueflag);
+					//console.log(whiteflag + "/" + missionWhiteflag);
+					//console.log(sit + "/" + missionSit);
+					if(blueflag == missionBlueflag &&
+						whiteflag == missionWhiteflag &&
+						sit == missionSit){
+							pointup();
+							//console.log("포인트업");
+						}else{
+							wrong();
+							//console.log("실패");
+						}
+					//console.log("다음");
+				}
+			}
+
+			function sitf(flag){ 
+
+
+				if(flag ==1){
+					$(".btn_s").attr("src","./images/btn_so.png");
+					setTimeout(function(){
+						$(".btn_s").attr("src","./images/btn_s.png");
+					},100);
+				}else{
+					$(".btn_u").attr("src","./images/btn_uo.png");
+					setTimeout(function(){
+						$(".btn_u").attr("src","./images/btn_u.png");
+					},100);
+				}
+
+
+				actionCount += 1;
+				sit = flag
+
+
+				drawState();
+
+				if(actionKind == 1 && actionCount < 2){
+					//console.log("2action 대기 아무것도안함")
+				}else{
+					/*
+					console.log(blueflag + "/" + missionBlueflag);
+					console.log(whiteflag + "/" + missionWhiteflag);
+					console.log(sit + "/" + missionSit);
+					*/
+					if(blueflag == missionBlueflag &&
+						whiteflag == missionWhiteflag &&
+						sit == missionSit){
+							pointup();
+							//console.log("포인트업");
+						}else{
+							wrong();
+							//console.log("실패");
+						}
+					//console.log("다음");
+				}
+			}
+
+
+			function bak(flag){
+
+				if(flag ==1){
+					$(".btn_bu").attr("src","./images/btn_buo.png");
+					setTimeout(function(){
+						$(".btn_bu").attr("src","./images/btn_bu.png");
+					},100);
+				}else{
+					$(".btn_bd").attr("src","./images/btn_bdo.png");
+					setTimeout(function(){
+						$(".btn_bd").attr("src","./images/btn_bd.png");
+					},100);
+				}
+
+				actionCount += 1;
+				whiteflag = flag
+
+				drawState();
+
+				if(actionKind == 1 && actionCount < 2){
+					//console.log("2action 대기 아무것도안함")
+				}else{
+					/*
+					console.log(blueflag + "/" + missionBlueflag);
+					console.log(whiteflag + "/" + missionWhiteflag);
+					console.log(sit + "/" + missionSit);
+					*/
+					if(blueflag == missionBlueflag &&
+						whiteflag == missionWhiteflag &&
+						sit == missionSit){
+							pointup();
+							//console.log("포인트업");
+						}else{
+							wrong();
+							//console.log("실패");
+							
+						}
+					//console.log("다음");
+				}
+			}
+
+			function drawState(){
+				var state = blueflag + "" + sit + "" + whiteflag;
+				//console.log(state);
+				switch(state){
+					case "000" :  //기본자세
+						$("#character").attr("src","./images/d.png");
+						break;
+					case "100" :  // 청기듬
+						$("#character").attr("src","./images/cu.png");
+						break;
+					case "010" :  // 앉음
+						$("#character").attr("src","./images/s.png");
+						break;
+					case "001" :   // 백기듬
+						$("#character").attr("src","./images/bu.png");
+						break;
+					case "110" :   // 앉고 청기듬
+						$("#character").attr("src","./images/scu.png");
+						break;
+					case "011" :   // 앉고 백기듬
+						$("#character").attr("src","./images/sbu.png");
+						break;
+					case "101" :   // 청기 백기 듬
+						$("#character").attr("src","./images/2u.png");
+						break;
+					case "111" :   // 앉고 청기 백기 듬
+						$("#character").attr("src","./images/s2u.png");
+						break;
+					default : 
+						break;
+				}
+			}
+
+
+			function nextPlay(flag){
+
+
+				clearInterval(myInterval);
+
+
+				if (flag == 1){
+					setTimeout(function(){
+						loop();
+					}, 1500);
+				}else{
+					setTimeout(function(){
+						loop();
+					}, 2000);
+				}
+
+			}
+
+			function pointup(){
+
+				
+				$("#characteryes").css("display","");
+
+				$("#point").html(parseInt($("#point").html(),10) + 1);
+				successSound.play();
+				//키입력 막고 다음이 될때 까지 기다림!
+				clearInterval(myInterval);
+				$(".playBtn").css("visibility","hidden");
+
+				nextPlay(1);
+
+			}
+
+			function wrong(){
+
+				
+
+				$("#characterno").css("display","");
+				cry(blueflag + "" + sit + "" + whiteflag);
+
+				wrongSound.play();
+				//키입력 막고 다음이 될때 까지 기다림!
+				clearInterval(myInterval);
+				$(".playBtn").css("visibility","hidden");
+
+				nextPlay(0);
+
+				$(".reouter3").css("animation-name","no");
+				$(".reouter2").css("animation-name","no");
+				$(".reouter1").css("animation-name","no");
+
+			}
+
+			function cry(state){
+				switch(state){
+					case "000" :  //기본자세
+						$("#character").attr("src","./images/d-1.png");
+						break;
+					case "100" :  // 청기듬
+						$("#character").attr("src","./images/cu-1.png");
+						break;
+					case "010" :  // 앉음
+						$("#character").attr("src","./images/s-1.png");
+						break;
+					case "001" :   // 백기듬
+						$("#character").attr("src","./images/bu-1.png");
+						break;
+					case "110" :   // 앉고 청기듬
+						$("#character").attr("src","./images/scu-1.png");
+						break;
+					case "011" :   // 앉고 백기듬
+						$("#character").attr("src","./images/sbu-1.png");
+						break;
+					case "101" :   // 청기 백기 듬
+						$("#character").attr("src","./images/2u-1.png");
+						break;
+					case "111" :   // 앉고 청기 백기 듬
+						$("#character").attr("src","./images/s2u-1.png");
+						break;
+					default : 
+						break;
+				}
+			}
+
+
+
+
+			function missionChk(){
+				
+				// 0은 아직 할께 더 있음
+				// 1은 성공
+				blueflag = missionBlueflag;
+				whiteflag = missionWhiteflag;
+				sit = missionSit;
+				// 2는 실패
+
+
+			}
+
+			var actionKind;
+			function makeNextMission(){
+				//console.log("makeNextMission");
+				missionStr = "";
+				arrMissionStr = [];
+
+				// 1.랜덤 1actoin을 할꺼냐 2action을 할꺼냐 fackaction을 할꺼냐 3가지중 한가지 선택
+				var myRandom = Math.random();
+				actionKind = Math.floor( myRandom * 3 )
+				//console.log(actionKind);
+
+				// 2.name을 청기를 할꺼냐 백기를 할꺼냐 앉아일어서를 할꺼냐 선택
+				var nameIdx = Math.floor( myRandom * 3 )
+				missionStr = names[nameIdx];
+
+				if (names[nameIdx] != ""){
+					arrMissionStr.push(names[nameIdx]);
+				}
+				
+
+
+				//미션값을 현생타로 변경후에 새로운 미션을 한다.
+				missionBlueflag = blueflag
+				missionWhiteflag = whiteflag
+				missionSit = sit
+
+
+
+				makeActionStr(nameIdx,actionKind); //전역변수 missionStr 를 세팅하고 필요한 변수를 세팅한다.
+				
+				//console.log(missionStr + ":" + missionBlueflag + "/" + missionWhiteflag +"/" + missionSit + "현상태 : " + blueflag + "/" + whiteflag + "/" + sit);
+
+				txt = missionStr;
+				
+				//미션칸 초기화
+				$("#mission").html("");
+				i = 0;
+				typeWriter();
+				speech();
+
+				/*
+				blueflag = missionBlueflag;
+				whiteflag = missionWhiteflag;
+				sit = missionSit;
+				*/
+
+			}
+
+			function speech(){
+				//첫마디만 말함. 나머진 이벤트로!
+				if (arrMissionStr.length >= 1){
+					if (arrMissionStr[0] != ""){
+						eval(arrMissionStr[0]).play();
+					}
+					arrMissionStr.shift();
+				}			
+			}
+
+			function makeActionStr(nameIdx,actionKind){
+				var nameIdx2
+				// 문자열 종류에 따른 switch 문을 1차로 호출하고 내부에서 2차 이름에 따른 switch문 호출
+				switch(actionKind){
+					case 0 : 
+						makeActionStrLast(nameIdx);
+						break;
+					case 1 :
+						makeActionStrDouble(nameIdx);
+						nameIdx2 = secondName(nameIdx)
+						makeActionStrLast(nameIdx2);
+						break;
+					case 2 :
+						makeActionStrFake(nameIdx);
+						nameIdx2 = secondName(nameIdx)
+						makeActionStrLast(nameIdx2);
+						break;
+					default : 
+						break;
+				}
+			}
+
+			function secondName(nameIdx){
+				//랜덤으로 0,1의 숫자를 가져와서
+				//남은 name 배열중에 0이면 배열앞에꺼 , 1이면 배열 뒤에꺼를 고른다.
+				var myRandom = Math.random();
+				var tempNameIdx = Math.floor( myRandom * 2 )
+				switch(nameIdx){
+					case 0 : 
+						if(tempNameIdx == 0){
+							nameIdx = 1
+						}else{
+							nameIdx = 2
+						}
+						break;
+					case 1 :
+						if(tempNameIdx == 0){
+							nameIdx = 0
+						}else{
+							nameIdx = 2
+						}						
+						break;
+					case 2 :
+						if(tempNameIdx ==0){
+							nameIdx = 0
+						}else{
+							nameIdx = 1
+						}						
+						break;
+					default : 
+						break;
+				}
+				missionStr = missionStr + " " + names[nameIdx];
+				if (names[nameIdx] != ""){
+					arrMissionStr.push(names[nameIdx]);
+				}
+				return nameIdx;
+			}
+
+
+			// 문자열 처리 함수는 3종료
+			// 중간문자,fake문자,마지막문자 를 만드는 함수.
+			// 1Action 은 무조건 마지막 문자를 만드는 함수만 호출
+			// 중간문자,마지막문자를 세팅하는건 해당 체크 flag 를 변경
+
+			
+			// 마지막 처리 함수
+			function makeActionStrLast(nameIdx){
+				switch(nameIdx){
+					case 0 :
+						if (blueflag == 0){
+							missionStr = missionStr + blueAction[0];
+							arrMissionStr.push(blueAction[0]);
+							missionBlueflag = 1;
+						}else{
+							missionStr = missionStr + blueAction[1];
+							arrMissionStr.push(blueAction[1]);
+							missionBlueflag = 0;
+						}
+						break;
+					case 1 :
+						if (whiteflag == 0){
+							missionStr = missionStr + whiteAction[0];
+							arrMissionStr.push(whiteAction[0]);
+							missionWhiteflag = 1;
+						}else{
+							missionStr = missionStr + whiteAction[1];
+							arrMissionStr.push(whiteAction[1]);
+							missionWhiteflag = 0;
+						}
+						break;
+					case 2 :
+						if (sit == 0){
+							missionStr = missionStr + sitAction[0];
+							arrMissionStr.push(sitAction[0]);
+							missionSit = 1;
+						}else{
+							missionStr = missionStr + sitAction[1];
+							arrMissionStr.push(sitAction[1]);
+							missionSit = 0;
+						}						
+						break;
+					default : 
+						break;
+				}
+			}
+
+			// 2action 연결문자를 만드는 함수
+			function makeActionStrDouble(nameIdx){
+				switch(nameIdx){
+					case 0 :
+						if (blueflag == 0){
+							missionStr = missionStr +  blueDoubleAction[0];
+							arrMissionStr.push(blueDoubleAction[0]);
+							missionBlueflag = 1;
+						}else{
+							missionStr = missionStr +  blueDoubleAction[1];
+							arrMissionStr.push(blueDoubleAction[1]);
+							missionBlueflag = 0;
+						}
+						break;
+					case 1 :
+						if (whiteflag == 0){
+							missionStr = missionStr +  whiteDoubleAction[0];
+							arrMissionStr.push(whiteDoubleAction[0]);
+							missionWhiteflag = 1;
+						}else{
+							missionStr = missionStr +  whiteDoubleAction[1];
+							arrMissionStr.push(whiteDoubleAction[1]);
+							missionWhiteflag = 0;
+						}
+						break;
+					case 2 :
+						if (sit == 0){
+							missionStr = missionStr +  sitDoubleAction[0];
+							arrMissionStr.push(sitDoubleAction[0]);
+							missionSit = 1;
+						}else{
+							missionStr = missionStr +  sitDoubleAction[1];
+							arrMissionStr.push(sitDoubleAction[1]);
+							missionSit = 0;
+						}						
+						break;
+					default : 
+						break;
+				}
+			}
+
+			// fake 연결문자를 만드는 함수 , checkFlag 를 변경하지 않는다!
+			function makeActionStrFake(nameIdx){
+				
+				switch(nameIdx){
+					case 0 :
+						if (blueflag == 0){
+							missionStr = missionStr +  blueFakeAction[0];
+							arrMissionStr.push(blueFakeAction[0]);
+						}else{
+							missionStr = missionStr +  blueFakeAction[1];
+							arrMissionStr.push(blueFakeAction[1]);
+						}
+						break;
+					case 1 :
+						if (whiteflag == 0){
+							missionStr = missionStr +  whiteFakeAction[0];
+							arrMissionStr.push(whiteFakeAction[0]);
+						}else{
+							missionStr = missionStr +  whiteFakeAction[1];
+							arrMissionStr.push(whiteFakeAction[1]);
+						}
+						break;
+					case 2 :
+						if (sit == 0){
+							missionStr = missionStr +  sitFakeAction[0];
+							arrMissionStr.push(sitFakeAction[0]);
+						}else{
+							missionStr = missionStr +  sitFakeAction[1];
+							arrMissionStr.push(sitFakeAction[1]);
+						}						
+						break;
+					default : 
+						break;
+				}
+				
+			}
+
+		</script>
+
+	<style>
+
+		*{
+			
+		}
+
+
+
+
+		.navbar {
+			position:absolute;
+			top:0;
+			width:100%;
+
+		}
+
+		html , body {
+			width:100%;
+			height:100%;
+			background-color:white;
+		}
+
+
+		@media (min-width: 800px) { /* 800 ~ */
+			html,body{
+				width:800px;
+				position:relative;
+				left:50%;
+				margin-left:-400px;
+			}
+		}
+
+
+		@font-face {
+			font-family: 'yg-jalnan';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		.myContainer{
+			position:relative;
+			width:100%;
+			height:100%;
+			top:0;
+
+		}
+
+		.ad{
+			border:1px solid black;
+			top:61px;
+			position:absolute;
+			width:100%;
+			height:50px;
+			/* background-color:#ffcc00; */
+			background-size:cover;
+			z-index:2000;			
+			text-align:center;
+		}
+		
+		.sky{
+			top:0;
+			position:absolute;
+			width:100%;
+			height:100vh;
+			/* background-image:url('./images/sky.png'); */
+			background-size:cover;
+			z-index:1;
+		}
+
+
+
+		.grass{
+			position:absolute;
+			bottom:0;
+			width:100%;
+			height:53vh;
+			/* background-color:#33cc99; */
+			/* background-image:url('./images/grass.png'); */
+			background-size:cover;
+			z-index:2;
+		}
+
+		.character{
+			position:absolute;
+			bottom:28vh;
+			width:100%;
+			height:40vh;
+/* 			background-color:red;
+			background-size:cover; */
+			text-align:center;
+			z-index:5;	
+		}
+
+		@media (max-height: 600px) { /* 0~600 */
+			.character{
+				position:absolute;
+				bottom:28vh;
+				width:100%;
+				height:35vh;
+	/* 			background-color:red;
+				background-size:cover; */
+				text-align:center;
+				z-index:5;	
+			}			
+
+		}
+
+		@media (min-width: 520px) { /* 520 ~ */
+			.character{
+				position:absolute;
+				bottom:35vh;
+				width:80%;
+				left:10%;
+				height:35vh;
+	/* 			background-color:red;
+				background-size:cover; */
+				text-align:center;
+				z-index:5;	
+			}			
+
+		}
+
+		.character img{
+			width:85%;
+		}
+
+		.button{
+			position:absolute;
+			top:77vh;
+			width:100%;
+			height:15vh;
+			/* background-color:blue; */
+			background-size:cover;
+			z-index:5;	
+			text-align:center;
+		}
+
+		.button div.startBtn{
+			position:absolute;
+			text-align:center;
+			width:100%;
+		}
+
+		.infoBoard{
+			position:absolute;
+			top:110px;
+			width:100%;
+			height:20vh;
+/* 			background-color:yellow; */
+			background-size:cover;
+			z-index:5;	
+			
+			
+
+		}
+
+		.infoBoard .score{
+			padding-top:10px;
+			width:25%;
+			float:left;
+			text-align:center;
+		}
+
+		.infoBoard .score div{
+			font-size:1.5em;
+			font-family:'yg-jalnan';
+			text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+		}
+
+		.infoBoard .time{
+			
+			position:absolute;
+			text-align:center;
+			width:50%;
+			left:50%;
+			margin-left:-25%;
+			padding:0 5px;
+			
+		}
+
+		.infoBoard .alltime{
+			position:absolute;
+			right:0;
+			/* background-image:url('./images/timer.png'); */
+			background-size:contain;
+			background-position:center;
+			background-repeat:no-repeat;
+			width:25%;
+			height:60px;
+			background-position:50% 0%;
+			float:right;
+			margin-top:5px;
+		}
+
+		.infoBoard .alltime #timer{
+			text-align:center;
+			padding-top:25px;
+			z-index:100;
+		}
+
+		.infoBoard .alltime #canvas2{
+			width:60%;
+			left:20%;
+			z-index:90;
+			
+		}
+		
+
+		.infoBoard .alltime div{
+			font-size:1.5em;
+		}
+
+		.infoBoard .missionText{
+			text-align:center;
+			font-family:'yg-jalnan';
+			font-size:1.5em;
+			clear:both;
+		}
+		
+
+		.button{
+			
+		}
+
+		.button .btn_start{
+			width:20%;
+			
+		}
+
+		.button .flagBtn.btnc{
+ 			width:20%;
+		}
+
+		.button .flagBtn.btnb{
+ 			width:20%;
+		}
+
+		.button .sitBtn{
+ 			width:42%;
+		}
+
+		@media (min-width: 520px) { /* 520 ~ */
+		
+			.button .flagBtn.btnc{
+				width:15%;
+			}
+
+			.button .flagBtn.btnb{
+				width:15%;
+			}
+
+			.button .sitBtn{
+				width:33%;
+			}
+		}
+
+
+
+		#canvas{
+			width:100%;
+			height:60px;
+			/* background:#eee; */
+		}
+
+		#canvas2{
+			position:absolute;
+			/* background:#eee; */
+		}
+
+		.hspace{
+			height:25px;
+		}
+
+		.endBoard{
+			/* background-image:url('./images/endBoard.png'); */
+			margin:0;
+			padding:0;
+			left:50%;
+			margin-left:-122px;
+			width:255px;
+			height:180px;
+			position:relative;
+			background-size:cover;
+		}
+
+		#point2{
+			font-size:1.8em;
+		}
+
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-xs bg-dark navbar-dark" style="z-index:9000;">
+  <a class="navbar-brand" href="https://mnmsoft.co.kr" target="_blank">엠엔엠소프트</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+    <li class="nav-item"><a class="nav-link" href="/content/card">카톡 웹카드 보내기  </a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/ant">터치팡팡</a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/lotto">lotto번호추출</a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/piano">절대음감테스트</a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/namelove">이름 궁합</a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/chung">청기백기게임 </a></li>
+		<li class="nav-item"><a class="nav-link" href="/friendvs">친구와 가위바위보</a></li>
+		<li class="nav-item"><a class="nav-link" href="/aivs">AI와 가위바위보</a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/sameface">닮은동물찾기</a></li>
+		<li class="nav-item"><a class="nav-link" href="/content/nearTaste">근처식당추천</a></li>
+
+		<!--
+		<li class="nav-item"><a class="nav-link" target="_blank" href="http://thankyou.mnmsoft.co.kr">3줄일기(감사일기)</a></li>     
+		-->
+		<li class="nav-item"><a class="nav-link" target="_blank" href="https://play.google.com/store/apps/details?id=com.mnmsoft.mnmsoftgame003" >날아라 병아리</a></li>
+		<li class="nav-item"><a class="nav-link" target="_blank" href="https://play.google.com/store/apps/details?id=com.mnmsoft.mnmsoftgame004" >동물소리 흉내내기</a></li>   
+    </ul>
+  </div>  
+</nav>
+<style>
+	.bb{
+		animation-name:blink;
+		animation-duration: 0.7s;
+	    animation-iteration-count: infinite;
+		animation-timing-function: linear;
+
+	}
+	@keyframes blink{
+		0% {opacity:1;}
+		45% {opacity:1;}
+		46% {opacity:0;}
+		100% {opacity:0;}
+	}
+</style>
+
+
+	
+
+	<div class="myContainer">
+
+		<div id="popvs" style="display:none;">
+			<div id ="popup_mask" style="z-index:2001;position: fixed;width: 100%;height: 1000px;top: 0px;left: 0px;background-color:#000;opacity: 0.8;" onclick="$('#popvs').hide();"></div>
+			<div style="position:absolute;left:5%;top:30%;margin-top:-100px;width:90%;background:white;z-index:2002;">
+				<div style="height:10px;"></div>
+				<div class="" style="text-align:center;"><img src="http://via.placeholder.com/" style="width:60%;"></div>
+				<div style="height:10px;"></div>
+				<div class="endBoard">
+					<div style="text-align:center;padding-top:20px;font-size:1.1em;">
+						순발력테스트 청기백기 결과
+					</div>
+					<div style="height:10px;"></div>
+					<div id="point2" style="text-align:center;">26점</div>
+					<div style="height:10px;"></div>
+					<div style="text-align:center;width:100%;">
+						<a href="javascript:rere()">
+							<img src="http://via.placeholder.com/" style="height:60px;"/>	
+						</a>
+						<a id="kakao-link-btn1" href="javascript:sendLink()">
+						  <img  src="http://via.placeholder.com/" style="height:60px;" />
+						</a>
+					</div>
+
+				</div>
+
+
+				<div class="hspace"></div>
+				<div style="width:320px;height:100px;background-color:red;text-align:center;position:relative;left:50%;margin-left:-160px;">
+                    <ins class="kakao_ad_area" style="display:none;" 
+                    data-ad-unit    = "DAN-2YtlqS2bJ0aMEatu" 
+                    data-ad-width   = "320" 
+                    data-ad-height  = "100"></ins> 
+                    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+					
+				</div>
+
+				<div class="hspace"></div>
+
+			</div>
+		</div>
+
+		
+
+		<div class="sky"></div>
+		<div class="infoBoard">
+			<div class="score">
+				<div>SCORE</div>
+				<div id="point">0</div>
+			</div>
+			<div class="time"><canvas id="canvas" width="200" height="60"></canvas></div>
+			<div class="alltime">
+				<canvas id="canvas2" width="104" height="127"></canvas>
+				<div id="timer">60</div>
+
+			</div>
+			<div class="missionText" id="mission"></div>
+		</div>
+		<div class="character">
+			<div style="position:absolute;text-align:center;left:50%;
+					transform:translate(-50%,0);top:65%;">
+				<img id="characterno" src="http://via.placeholder.com/100?text=no" style="display:none;width:50%;">
+			</div>
+			<div style="position:absolute;text-align:center;left:50%;
+					transform:translate(-50%,0);top:65%;">
+				<img id="characteryes" src="http://via.placeholder.com/100?text=yes" style="display:none;width:50%;">
+			</div>
+			<!-- <img id="character" src="http://via.placeholder.com/500?text=d" style="vertical-align:bottom;bottom:0;"> -->
+		</div>
+		
+
+		<div class="grass"></div>
+
+		
+
+		<div class="button">
+
+			<div class="startBtn">
+				<img src="http://via.placeholder.com/500?text=start" class="btn_start" onclick="init();" />
+			</div>
+
+			<div style="width:100%;visibility:hidden;" class="playBtn">
+				<img src="http://via.placeholder.com/100?text=btn_cu" class="flagBtn btnc btn_cu" onclick="chung(1);" />
+				<img src="http://via.placeholder.com/100?text=btn_u" class="sitBtn btn_u" onclick="sitf(0);" />
+				<img src="http://via.placeholder.com/100?text=btn_bu" class="flagBtn btnb btn_bu" onclick="bak(1);" />
+			</div>
+			<div style="margin-top:5px;width:100%;visibility:hidden;" class="playBtn">
+				<img src="http://via.placeholder.com/100?text=btn_cd"  class="flagBtn btnc btn_cd" onclick="chung(0);" />
+				<img src="http://via.placeholder.com/100?text=btn_s" class="sitBtn btn_s" onclick="sitf(1);" />
+				<img src="http://via.placeholder.com/100?text=btn_bd"  class="flagBtn btnb btn_bd" onclick="bak(0);" />
+			</div>			
+		</div>
+	</div>
+
+
+	
+
+	<script>
+
+		//console.log("width:" + document.body.clientWidth);
+		//console.log("height:" + document.body.clientHeight);
+
+		//alert("width:" + document.body.clientWidth);
+		//alert("height:" + document.body.clientHeight);
+
+		/*
+
+        var canvas2 = document.getElementById("canvas2");
+        var ctx2 = canvas2.getContext('2d');		
+		ctx2.globalCompositeOperation='destination-over';
+
+		var timerimg = new Image();
+		timerimg.src = "./images/timer.png";
+		var drawImageXSize = 80;
+		var drawImageYSize = drawImageXSize * timerimg.height / timerimg.width;
+		var drawImageXPos = (canvas2.width/2)-(drawImageXSize/2);
+		var drawImageYPos = (canvas2.height/2)-(drawImageYSize/2);
+
+		*/
+
+		/*
+		ctx2.beginPath();
+		ctx2.drawImage(timerimg,drawImageXPos,drawImageYPos,drawImageXSize,drawImageXSize * timerimg.height / timerimg.width);
+		ctx2.arc(canvas2.width/2,canvas2.height/2 + 12,29,0,Math.PI*2,false);
+		ctx2.fillStyle = "rgba(241,93,94,1)";
+		ctx2.fill();
+		*/
+
+		/*
+
+		var alltimeflagval = 271;
+		function drawAllTimer(){
+
+			ctx2.beginPath();
+			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
+
+			ctx2.beginPath();
+			ctx2.drawImage(timerimg,drawImageXPos,drawImageYPos,drawImageXSize,drawImageXSize * timerimg.height / timerimg.width);
+			ctx2.arc(canvas2.width/2,canvas2.height/2 + 12,29,Math.PI/180*270,Math.PI/180*alltimeflagval,true) // 271 ~ 630
+			ctx2.lineTo(canvas2.width/2,canvas2.height/2 + 12);
+			ctx2.fillStyle = "rgba(241,93,94,1)";
+			ctx2.fill();
+		}
+
+
+
+		*/
+
+
+
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext('2d');
+
+        var stopflag = 0;
+        var width;
+		var xPos = 15;
+		var yPos = 30;
+		var xEndPos = 185; //테두리및 안에 모두 지울때 사용
+		var xEndPlayPos = 185; //시간흐름때 사용.
+		var rVal = 10;
+
+		// canvas 사이즈는 200
+		// 앞뒤 시작점 15 끝점 15  을 빼면 170!
+		// 
+
+
+		var framecallCount = 0;
+
+
+		var drawFrame1;
+		function draw(){
+
+
+			//안에 빨간색을 모두 흰색으로 칠하기 (지우기)
+			
+			ctx.beginPath();
+			//ctx.clearRect(0,0,canvas.width,canvas.height);
+			ctx.arc(xPos, yPos, rVal, (Math.PI / 180) * 90, (Math.PI / 180) * 270, false); // Outer circle
+			ctx.arc(xEndPos , yPos, rVal, (Math.PI / 180) * 270, (Math.PI / 180) * 90, false); // Outer circle
+			ctx.lineTo(xPos, yPos + rVal);
+			ctx.fillStyle = "rgb(255,255,255)";
+			ctx.fill();
+			ctx.closePath();
+			
+
+			if (1 < xEndPlayPos){
+			//안에 빨간색
+			ctx.beginPath();
+			ctx.arc(15, yPos, rVal, (Math.PI / 180) * 90, (Math.PI / 180) * 270, false); // Outer circle
+			ctx.arc(xEndPlayPos, yPos, rVal, (Math.PI / 180) * 270, (Math.PI / 180) * 90, false); // Outer circle
+			ctx.lineTo(xPos, yPos + rVal);
+			ctx.fillStyle = "rgb(241,93,94)";
+			ctx.fill();
+			ctx.closePath();
+			}else{
+				wrong();
+			}
+
+			//테두리
+			ctx.beginPath();
+			ctx.arc(xPos, yPos, rVal + 1, (Math.PI / 180) * 90, (Math.PI / 180) * 270, false); // Outer circle
+			ctx.arc(xEndPos, yPos, rVal + 1, (Math.PI / 180) * 270, (Math.PI / 180) * 90, false); // Outer circle
+			ctx.lineTo(xPos, yPos + rVal + 1);
+			ctx.lineWidth = 4;
+			ctx.fillStyle = "rgb(0,0,0)";
+			ctx.stroke();
+
+			//명암 효과1
+			ctx.beginPath();
+			ctx.arc(25, 27, 3, (Math.PI / 180) * 90, (Math.PI / 180) * 270, false); // Outer circle
+			ctx.arc(35 , 27, 3, (Math.PI / 180) * 270, (Math.PI / 180) * 90, false); // Outer circle
+			ctx.lineTo(25, 27 + 3);
+			ctx.fillStyle = "rgb(215,238,247)";
+			ctx.fill();
+			ctx.closePath();
+
+			//명암 효과2
+			ctx.beginPath();
+			ctx.arc(45, 27, 3, (Math.PI / 180) * 90, (Math.PI / 180) * 270, false); // Outer circle
+			ctx.arc(ctx.canvas.width - 25 , 27, 3, (Math.PI / 180) * 270, (Math.PI / 180) * 90, false); // Outer circle
+			ctx.lineTo(45, 27 + 3);
+			ctx.fillStyle = "rgb(215,238,247)";
+			ctx.fill();
+			ctx.closePath();
+
+			
+			//console.log(xPos + "/" + xEndPlayPos);
+			xEndPlayPos = xEndPlayPos - 6.16;
+
+
+		}
+
+
+
+		
+
+	</script>
+	<script>
+		function sendLink(){
+			Kakao.Link.sendDefault({
+			  objectType: 'feed',
+			  content: {
+				title: '청기백기',
+				description: '#순발력테스트 #내점수는'+$("#point2").html()+' #청기백기',
+				imageUrl:
+				  'https://mnmsoft.co.kr/content/chung/images/talklink.png',
+				link: {
+				  mobileWebUrl: 'https://mnmsoft.co.kr/content/chung/',
+				  webUrl: 'https://mnmsoft.co.kr/content/chung/',
+				},
+			  },
+			})
+		}
+
+		function rere(){
+			location.href = "/content/chung"
+		}
+	</script>
+	<script>
+			var gameOn;
+			var myInterval;
+			var endtimer;
+			var wrongloop;
+			var tikSound = document.getElementById("tiksound");
+			var gameoverSound = document.getElementById("gameoversound");
+			var wrongSound = document.getElementById("wrongsound");
+			var successSound = document.getElementById("successsound");
+
+
+			var 청기 = document.getElementById("청기");
+			var 백기 = document.getElementById("백기");
+			var 들어 = document.getElementById("들어");
+			var 내려 = document.getElementById("내려");
+			var 들고 = document.getElementById("들고");
+			var 내리고 = document.getElementById("내리고");
+			var 들지말고 = document.getElementById("들지말고");
+			var 내리지말고 = document.getElementById("내리지말고");
+			var 앉아 = document.getElementById("앉아");
+			var 일어서 = document.getElementById("일어서");
+			var 앉고 = document.getElementById("앉고");
+			var 일어서고 = document.getElementById("일어서고");
+			var 앉지말고 = document.getElementById("앉지말고");
+			var 일어서지말고 = document.getElementById("일어서지말고");
+
+
+
+			window.addEventListener('pagehide', function(){
+				end();
+			});
+			document.addEventListener('webkitvisibilitychange', function(){
+				end();
+			});
+			document.addEventListener('visibilitychange', function(){
+				end();
+			});
+
+			function init(){
+
+
+				
+				$(".startBtn").css("visibility","hidden");
+				$(".playBtn").css("visibility","visible");
+				$("#character").attr("src","http://via.placeholder.com/100?text=d");
+				blueflag = 0;
+				whiteflag = 0;
+				sit = 0;
+				$("#point").html(0);
+				$('#timer').html(60);
+				gameOn = 1;
+
+				alltimeflagval = 271;
+				endtimer = setInterval(endTimer, 1000);
+				$(".outer1").css("animation-name","spin1");
+				$(".outer2").css("animation-name","spin2");
+				$(".outer3").css("animation-name","spin3");
+				$(".outerofouter1").css("animation-name","spin1");
+				$(".outerofouter2").css("animation-name","spin2");
+				$(".outerofouter3").css("animation-name","spin3");
+				tikSound.play();
+				loop();
+
+			}
+	</script>
+
+</body>
+</html>
