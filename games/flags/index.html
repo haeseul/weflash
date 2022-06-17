@@ -13,13 +13,16 @@
         <div class="start">
             <button class="start_button">시작하기</button>
         </div>
-        <div class="end">
-            <div class="end_text">청기백기 결과</div>
-            <div class="end_board">
-                <div class="end_score"></div>
-                <div class="end_point"></div>
+        <div class="popup">
+            <div class="popup_mask"></div>
+            <div class="end">
+                <div class="end_text">청기백기 결과</div>
+                <div class="end_board">
+                    <div class="end_score"></div>
+                    <div class="end_point"></div>
+                </div>
+                <div class="restart_button">다시해보기</div>
             </div>
-            <div class="restart_button">다시해보기</div>
         </div>
         <div class="info">
             <div class="score">
@@ -37,9 +40,9 @@
                 </div>
             </div>
             <div class="progressbar">
-                <div class="bar"></div>
+                <canvas class="progress" width="200" height="60" overflow="hidden"></canvas>
             </div>
-            <div class="buttons">
+            <div class="flags">
                 <button class="blue_flag">청</button>
                 <button class="character">
                     <img class="char" src="./images/char_up.png" alt="char_up">

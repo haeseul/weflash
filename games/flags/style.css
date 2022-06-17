@@ -12,6 +12,7 @@ main {
 }
 
 .start {
+    visibility: hidden;
     position: absolute;
     top: 0;
     left: 0;
@@ -56,18 +57,26 @@ main {
     box-shadow: 1px 1px 0 rgba(0,0,0,0.5);
 }
 
-.end {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+.popup_mask {
+    position: fixed;
     width: 100%;
-    height: 100%;
-    display: block;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(1.5px);
-    -webkit-backdrop-filter: blur(1.5px);
-    z-index: 2;
+    height: 1000px;
+    top: 0px;
+    left: 0px;
+    background-color:#000;
+    opacity: 0.4;
+    z-index:2001;
+}
+
+.end {
+    /* visibility: hidden; */
+    position:absolute;
+    left:5%;
+    top:30%;
+    margin-top:-100px;
+    width:90%;
+    background:white;
+    z-index:2002;
 }
 
 .start.show {
@@ -120,6 +129,7 @@ section {
     align-items: center;
     justify-content: center;
     border: 1px solid gray;
+    border-radius: 20px;
     width: 500px;
     height: 100px;
 }
@@ -133,6 +143,7 @@ section {
     position: relative;
     display: flex;
     justify-content: center;
+    border-radius: 20px;
     width: 100%;
     height: 100%;
     background-color: rgba(128, 128, 128, 0.207);
@@ -149,29 +160,11 @@ section {
     content: url("./images/wrong.png");
 }
 
-.progressbar {
-    margin-top: 10px;
-    width: 240px;
-    height: 20px;
-    border-radius: 30px;
-    background-color: #ddd;
-}
-
-.bar {
-    margin: 0;
-    width: 240px;
-    height: 20px;
-    border-radius: 30px;
-    background-color: rgb(3, 130, 176);
-
-}
-
-
-.buttons {
+.flags {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .character {

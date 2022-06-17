@@ -23,7 +23,7 @@
     const $progressbar = get('.progressbar')
     const $bar = get('.bar')
     const $char = get('.char')
-    const $buttons = get('.buttons')
+    const $flags = get('.flags')
     const $blue_flag = get('.blue_flag')
     const $white_flag = get('.white_flag')
 
@@ -58,11 +58,67 @@
     var arrstatementStr 
     var actCount
 
-    // const flags = new Array("청기", "백기", "둘 다")
-    // const controls_simple = new Array("올려", "내려", "올리지 마", "내리지 마")
-    // const controls_up = new Array("올리고", "올리지 말고")
-    // const controls_down = new Array("내리고", "내리지 말고")
-    // const action = new Array("앉아", "일어나", "앉지마", "일어나지 마")
+    const $progress = get('.progress')
+    const ctx = $progress.getContext('2d')
+
+    var x = 15
+    var y = 30
+    var xMax = 185
+    var playing = 185
+    var r = 10
+    var startAngle = (Math.PI / 180) * 90
+    var endAngle = (Math.PI / 180) * 270
+
+    const progBar = () => {
+        ctx.beginPath()
+        ctx.arc(x, y, r, startAngle, endAngle, false)
+        ctx.arc(xMax, y, r, endAngle, startAngle, false)
+        ctx.lineTo(x, y+r)
+        ctx.fillStyle = "rgb(255, 255, 255)"
+        ctx.fill()
+        ctx.closePath()
+
+        if (1 < playing) {
+            ctx.beginPath()
+            ctx.arc(x, y, r, startAngle, endAngle, false)
+            ctx.arc(playing, y, r, endAngle, startAngle, false)
+            ctx.lineTo(x, y+r)
+            ctx.fillStyle = "rgba(0, 97, 132, 0.511)"
+            ctx.fill()
+            ctx.closePath()
+        } else {
+            wrong()
+        }
+
+        // 테두리
+        // ctx.beginPath()
+        // ctx.arc(x, y, r+1, startAngle, endAngle, false)
+        // ctx.arc(xMax, y, r+1, endAngle, startAngle, false)
+        // ctx.lineTo(x, y+r+1)
+        // ctx.lineWidth = 1
+        // ctx.strokeStyle = "rgb(128,128,128)"
+        // ctx.stroke()
+        // ctx.closePath()
+
+        // 명암
+        ctx.beginPath()
+        ctx.arc(25, 27, 3, startAngle, endAngle, false)
+        ctx.arc(35, 27, 3, endAngle, startAngle, false)
+        ctx.lineTo(25, 27 + 3)
+        ctx.fillStyle = "rgba(215, 238, 247, 0.5)"
+        ctx.fill()
+        ctx.closePath()
+
+        ctx.beginPath()
+        ctx.arc(45, 27, 3, startAngle, endAngle, false)
+        ctx.arc(ctx.canvas.width - 25, 27, 3, endAngle, startAngle, false)
+        ctx.lineTo(45, 27 + 3)
+        ctx.fillStyle = "rgba(215, 238, 247, 0.5)"
+        ctx.fill()
+        ctx.closePath()
+
+        playing -= 6.16
+    }
 
     const playNext = (flag) => {
         clearInterval(myInterval)
@@ -165,22 +221,6 @@
     }
 
 
-    const randomItem = (arr) => {
-        return arr[Math.floor(Math.random() * arr.length)]
-    }
-
-    const randomItem2 = (arr1, arr2) => {
-        let random = Math.floor((Math.random() * 9) + 1)
-        console.log(random)
-        if (random % 2 == 0) {
-            console.log("arr1")
-            return randomItem(arr1)
-        } else {
-            console.log("arr2")
-            return randomItem(arr2)
-        }
-    }
-
     const draw = () => {
         var state = blueflag + "" + sitflag + "" + whiteflag
 
@@ -228,13 +268,6 @@
             default:
                 break;
         }
-        // if (trial < 3) {
-        //     $statement.innerText = 
-        //     randomItem(flags) + " " + randomItem(controls_simple)
-        // } else {
-        //     $statement.innerText = 
-        //     randomItem(flags) + " " + randomItem2(controls_up, controls_down) + " " + randomItem(action)
-        // }
     }
 
     // 선택 안 된 name 고르기
@@ -465,6 +498,11 @@
 
         makeStatement()
         clearInterval(myInterval)
+
+        playing = 185
+        myInterval = setInterval(() => {
+            progBar()
+        }, 100);
     }
 
     const endTimer = () => {
@@ -509,15 +547,6 @@
         $btnBlueDown.addEventListener('click', () => {blue(0)})
         $btnSit.addEventListener('click', () => {sit(1)})
         $btnWhiteDown.addEventListener('click', () => {white(0)})
-
-        // makeStatement()
-
-        // $blue_flag.addEventListener('click', () => {
-        //     clickLeft()
-        // })
-        // $white_flag.addEventListener('click', () => {
-        //     clickRight()
-        // })
     }
 
     init()
