@@ -14,6 +14,10 @@
 
     const $startButton = get('.start_button')
     const $startModal = get('.start')
+    const $endMask = get('.end_mask')
+    const $endModal = get('.end')
+    const $endPoint = get('.end_point')
+    const $restartButton = get('.restart_button')
     const $point = get('.point')
     const $time = get('.time')
     const $playBtns = get('.playBtns')
@@ -519,6 +523,12 @@
         clearInterval(endtimer)
         clearInterval(wrongloop)
         gameOn = 0
+
+        setTimeout(() => {
+            $endModal.style.display = 'block'
+        }, 1000);
+
+        $endPoint.innerText = $point.innerText + "점"
     }
 
     const start = () => {
@@ -529,7 +539,7 @@
         whiteflag = 0
         sitflag = 0
         $point.innerText = 0
-        $time.innerText = 60
+        $time.innerText = 1
         gameOn = 1
 
         endtimer = setInterval(endTimer, 1000)
@@ -539,6 +549,15 @@
     const init = () => {
         $startButton.addEventListener('click', () => {
             start()
+        })
+
+        $restartButton.addEventListener('click', () => {
+            start()
+            $endModal.style.display = 'none';
+        })
+
+        $endMask.addEventListener('click', () => {
+            location.reload()
         })
 
         $btnBlueUp.addEventListener('click', () => {blue(1)})

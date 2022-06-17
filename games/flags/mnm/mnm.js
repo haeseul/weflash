@@ -133,11 +133,11 @@ function endTimer(){
 
     if($("#timer").html() - 1 > 0){
         $('#timer').html($("#timer").html() - 1);
-        $(".alltime").animate({'right':(-3)+'px'},20)
-            .animate({'right':(+3)+'px'},20)
-            .animate({'right':(-3)+'px'},20)
-            .animate({'right':(+3)+'px'},20)
-            .animate({'right':(0)+'px'},20);
+        // $(".alltime").animate({'right':(-3)+'px'},20)
+        //     .animate({'right':(+3)+'px'},20)
+        //     .animate({'right':(-3)+'px'},20)
+        //     .animate({'right':(+3)+'px'},20)
+        //     .animate({'right':(0)+'px'},20);
     
     }else {
         $('#timer').html(0);

@@ -46,7 +46,7 @@ function init(){
     whiteflag = 0;
     sit = 0;
     $("#point").html(0);
-    $('#timer').html(10);
+    $('#timer').html(5);
     gameOn = 1;
 
     alltimeflagval = 271;
