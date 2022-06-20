@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>지뢰찾기</title>
+</head>
+<body>
+    <div class="title">지뢰찾기</div>
+    <div class="gameover">
+        <div class="end">Game Over</div>
+            <button onclick="location.reload()" class="btn" type="button">
+                다시 시작하기
+            </button>
+    </div>
+    <div class="success">
+        <div class="end">성공! 지뢰를 피해 모든 칸을 열었어요!!</div>
+        <div class="ment"></div>
+        <button onclick="location.reload()" class="btn" type="button">
+            다시 시작하기
+        </button>
+    </div>
+    <div class="sub">
+        <input type="radio" name = 'level' id = 'easy' value = 'easy' checked/><label for = "easy">EASY</label>
+        <input type="radio" name = 'level' id = 'normal' value = 'normal' /><label for = "normal">NORMAL</label>
+        <input type="radio" name = 'level' id = 'hard' value = 'hard' /><label for = "hard">HARD</label>
+        <div class="start">START</div>
+    </div>
+    <div class="timer"> 0초</div>
+    <div class="game">
+        <table id="table">
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="result"></div>
+    <script src="script.js"></script>
+</body>
+</html>

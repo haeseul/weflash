@@ -197,7 +197,7 @@ function dropBlock() {
     clearInterval(downInterval);
     downInterval = setInterval(() => {
         moveBlock("top", 1)
-    }, 10)
+    }, 15)
 }
 
 function showGameOverText() {
@@ -227,10 +227,10 @@ document.addEventListener("keydown", e => {
     }
 })
 
-restartBtn.addEventListener("click", () => {
-    playground.innerHTML = ""; //초기화
-    next.innerHTML = "";
-    gameText.style.display = "none";
-    init();
-    generateNewBlock();
-})
+// restartBtn.addEventListener("click", () => {
+//     playground.innerHTML = ""; //초기화
+//     next.innerHTML = "";
+//     gameText.style.display = "none";
+//     init();
+//     generateNewBlock();
+// })
