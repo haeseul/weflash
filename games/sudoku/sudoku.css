@@ -77,7 +77,7 @@ nav {
     z-index: 99;
 }
 
-.nav-container {
+.nav_container {
     max-width: 1280px;
     margin: auto;
     display: flex;
@@ -87,30 +87,30 @@ nav {
     height: var(--nav-size);
 }
 
-.nav-logo {
+.nav_logo {
     font-size: var(--font-size-lg);
     color: var(--blue);
 }
 
-.dark-mode-toggle {
+.dark_mode_toggle {
     color: var(--blue);
     font-size: var(--font-size-lg);
     cursor: pointer;
 }
 
-.bxs-sun {
+.bxs_sun {
     display: none;
 }
 
-.bxs-moon {
+.bxs_moon {
     display: inline-block;
 }
 
-.dark .bxs-sun {
+.dark .bxs_sun {
     display: inline-block;
 }
 
-.dark .bxs-moon {
+.dark .bxs_moon {
     display: none;
 }
 
@@ -128,7 +128,7 @@ nav {
     min-width: 400px;
 }
 
-.start-screen {
+.start_screen {
     position: absolute;
     top: 0;
     left: 0;
@@ -142,15 +142,15 @@ nav {
     justify-content: center;
 }
 
-.start-screen.active {
+.start_screen.active {
     transform: translateX(0);
 }
 
-.start-screen > * + * {
+.start_screen > * + * {
     margin-top: 20px;
 }
 
-.input-name {
+.input_name {
     height: 80px;
     width: 280px;
     border-radius: var(--border-radious);
@@ -175,7 +175,7 @@ nav {
     cursor: pointer;
 }
 
-.btn-blue {
+.btn_blue {
     background: var(--blue);
     color: var(--white);
 }
@@ -200,7 +200,7 @@ nav {
     }
 }
 
-.main-game {
+.main_game {
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -210,17 +210,17 @@ nav {
     transition: transform 0.3s ease-in-out;
 }
 
-.main-game.active {
+.main_game.active {
     transform: translateX(0);
 }
 
-.main-sudoku-grid {
+.main_sudoku_grid {
     display: grid;
     gap: var(--gap);
     grid-template-columns: repeat(9, auto);
 }
 
-.main-grid-cell {
+.main_grid_cell {
     display: grid;
     place-items: center;
     width: var(--sudoku-cell-size);
@@ -232,29 +232,29 @@ nav {
     cursor: pointer;
 }
 
-.main-grid-cell.filled {
+.main_grid_cell.filled {
     background-color: var(--filled-bg);
     color: var(--filled-color);
 }
 
-.main-grid-cell.selected {
+.main_grid_cell.selected {
     background-color: var(--blue);
     color: var(--white);
 }
 
-.main-grid-cell:hover {
+.main_grid_cell:hover {
     border: 2px solid var(--blue);
 }
 
-.main-grid-cell.hover {
+.main_grid_cell.hover {
     border: 3px solid var(--blue);
 }
 
-.dark .main-grid-cell.hover {
+.dark .main_grid_cell.hover {
     border: 1px solid var(--blue);
 }
 
-.main-grid-cell.err {
+.main_grid_cell.err {
     background-color: var(--red);
     color: var(--white);
 }
