@@ -66,8 +66,14 @@
 
     // ------------------------------
 
-
     const init = () => {
+        const main_game_info_time = get('.main_game_info_time')
+        if(start_screen.classList.contains('active')) {
+            main_game_info_time.style.visibility = 'hidden'
+        } else {
+            main_game_info_time.style.visibility = 'visible'
+        }
+
         const darkmode = JSON.parse(localStorage.getItem('darkmode'))
         document.body.classList.add(darkmode ? 'dark' : 'light')
         get('meta[name="theme_color"]').setAttribute('content', darkmode ? '#1a1a2e' : '#fff')

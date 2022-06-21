@@ -7,21 +7,21 @@
 
     --white: #fff;
     --blue: #00aeef;
-    --red: #e91e63;
+    --red: #e91e47;
     --black: #000;
 
-    --nav-size: 70px;
-    --sudoku-cell-size: 50px;
+    --nav-size: 60px;
+    --sudoku-cell-size: 45px;
 
     --border-radious: 10px;
 
-    --space-y: 20px;
+    --space-y: 10px;
 
     --gap: 5px;
 
-    --font-size: 1.5rem;
-    --font-size-lg: 2rem;
-    --font-size-xl: 3rem;
+    --font-size: 1rem;
+    --font-size-lg: 1.5rem;
+    --font-size-xl: 2rem;
 }
 
 .dark {
@@ -96,21 +96,22 @@ nav {
     color: var(--blue);
     font-size: var(--font-size-lg);
     cursor: pointer;
+    z-index: 100;
 }
 
-.bxs_sun {
+.bxs-sun {
     display: none;
 }
 
-.bxs_moon {
+.bxs-moon {
     display: inline-block;
 }
 
-.dark .bxs_sun {
+.dark .bxs-sun {
     display: inline-block;
 }
 
-.dark .bxs_moon {
+.dark .bxs-moon {
     display: none;
 }
 
@@ -123,7 +124,7 @@ nav {
 
 .screen {
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     height: 100%;
     min-width: 400px;
 }
@@ -255,6 +256,69 @@ nav {
 }
 
 .main_grid_cell.err {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.main_game_info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: var(--space-y);
+    margin-bottom: 10px;
+}
+
+.main_game_info_box {
+    display: grid;
+    place-items: center;
+    height: 45px;
+    padding: 0 20px;
+    background-color: var(--bg-main);
+    border-radius: var(--border-radious);
+    color: var(--color-txt);
+    font-size: var(--font-size);
+}
+
+.main_game_info_time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.2rem;
+    margin-right: 4rem;
+}
+
+.pause_btn {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    background-color: var(--blue);
+    border-radius: var(--border-radious);
+    color: var(--white);
+    font-size: var(--font-size);
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+}
+
+.number {
+    display: grid;
+    place-items: center;
+    height: var(--sudoku-cell-size);
+    background-color: var(--bg-main);
+    border-radius: var(--border-radious);
+    color: var(--color-txt);
+    font-size: var(--font-size);
+    cursor: pointer;
+}
+
+.delete {
     background-color: var(--red);
     color: var(--white);
 }
