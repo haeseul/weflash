@@ -282,8 +282,9 @@ nav {
 .main_game_info_time {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 1.2rem;
+    justify-content: space-around;
+    width: calc(var(--sudoku-cell-size)*3);
+    padding: 0;
     margin-right: 4rem;
 }
 
@@ -297,7 +298,6 @@ nav {
     border-radius: var(--border-radious);
     color: var(--white);
     font-size: var(--font-size);
-    margin-left: 1rem;
     cursor: pointer;
 }
 
