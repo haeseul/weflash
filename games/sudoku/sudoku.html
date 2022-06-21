@@ -24,7 +24,7 @@
                 Sudoku
             </a>
             <div class="main_game_info_box main_game_info_time">
-                <span id="game_time">10:20</span>
+                <span id="game_time">00:00:00</span>
                 <div class="pause_btn" id="btn_pause">
                     <i class="bx bx-pause"></i>
                 </div>
@@ -43,7 +43,7 @@
         <div class="screen">
 
             <!-- start screen -->
-            <div class="start_screen " id="start_screen">
+            <div class="start_screen active" id="start_screen">
                 <input type="text" placeholder="Your name" maxlength="11" class="input_name" id="input_name">
                 <div class="btn" id="btn_level">
                     Easy
@@ -55,7 +55,7 @@
             
 
             <!-- game screen -->
-            <div class="main_game active">
+            <div class="main_game " id="game_screen">
                 <div class="main_sudoku_grid">
                     <!-- 9x9 (81 cell) -->
                     <div class="main_grid_cell"></div>
@@ -166,6 +166,14 @@
                 <div class="main_game_info"></div>
             </div>
             <!-- end game screen -->
+
+
+            <!-- pause screen -->
+            <div class="pause_screen" id="pause_screen">
+                <div class="btn btn_blue" id="btn_resume">Resume</div>
+                <div class="btn" id="btn_new_game">New Game</div>
+            </div>
+            <!-- end pause screen -->
 
 
         </div>

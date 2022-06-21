@@ -43,7 +43,7 @@ body {
     font-family: 'Potta One', cursive;
     height: 100vh;
     background-color: var(--bg-body);
-    overflow-x: hidden;
+    overflow: hidden;
     user-select: none;
 }
 
@@ -124,7 +124,7 @@ nav {
 
 .screen {
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
     height: 100%;
     min-width: 400px;
 }
@@ -187,18 +187,10 @@ nav {
 }
 
 @keyframes bounce {
-    0% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(20px);
-    }
-    50% {
-        transform: translateX(-20px);
-    }
-    100% {
-        transform: translateX(0);
-    }
+    0% {transform: translateX(0);}
+    25% {transform: translateX(20px);}
+    50% {transform: translateX(-20px);}
+    100% {transform: translateX(0);}
 }
 
 .main_game {
@@ -280,12 +272,13 @@ nav {
 }
 
 .main_game_info_time {
+    visibility: hidden;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: calc(var(--sudoku-cell-size)*3);
-    padding: 0;
-    margin-right: 4rem;
+    justify-content: space-between;
+    width: calc(calc(var(--sudoku-cell-size)*3) + 10px);
+    padding: 0 0 0 1rem;
+    margin-right: 4.3rem;
 }
 
 .pause_btn {
@@ -298,6 +291,7 @@ nav {
     border-radius: var(--border-radious);
     color: var(--white);
     font-size: var(--font-size);
+    margin-right: 1rem;
     cursor: pointer;
 }
 
@@ -321,4 +315,34 @@ nav {
 .delete {
     background-color: var(--red);
     color: var(--white);
+}
+
+.pause_screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-body);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: none;
+}
+
+.pause_screen.active {
+    display: flex;
+}
+
+.pause_screen > * + * {
+    margin-top: 20px;
+}
+
+.pause_screen.active .btn {
+    animation: zoom-in .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoom-in {
+    0% {transform: scale(3);}
+    100% {transform: scale(1);}
 }
