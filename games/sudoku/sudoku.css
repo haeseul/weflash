@@ -99,19 +99,19 @@ nav {
     z-index: 100;
 }
 
-.bxs_sun {
+.bxs-sun {
     display: none;
 }
 
-.bxs_moon {
+.bxs-moon {
     display: inline-block;
 }
 
-.dark .bxs_sun {
+.dark .bxs-sun {
     display: inline-block;
 }
 
-.dark .bxs_moon {
+.dark .bxs-moon {
     display: none;
 }
 
@@ -256,7 +256,6 @@ nav {
 }
 
 .main_grid_cell.err {
-<<<<<<< HEAD
     background-color: var(--red);
     color: var(--white);
 }
@@ -320,8 +319,6 @@ nav {
 }
 
 .delete {
-=======
->>>>>>> cebd71150d5968687ecd558d17329eb8cf22be89
     background-color: var(--red);
     color: var(--white);
 }
