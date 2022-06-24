@@ -75,6 +75,7 @@ const shuffleArray = (arr) => {
         arr[curr_index] = arr[rand_index]
         arr[rand_index] = temp
     }
+    return arr
 }
 
 

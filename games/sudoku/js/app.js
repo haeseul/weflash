@@ -35,6 +35,9 @@
     let pause = false
     let seconds = 0
 
+    let su = undefined
+    let su_answer = undefined
+
     // ------------------------------------------------------
 
 
@@ -64,8 +67,11 @@
 
     const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8)
 
+    // generate sudoku puzzle
     const initSudoku = () => {
-        
+        su = sudokuGen(level)
+        su_answer = [...su.question]
+        console.table(su_answer)
     }
 
     const startGame = () => {
@@ -79,6 +85,9 @@
         game_level.innerHTML = CONSTANT.LEVEL_NAME[level_index]
 
         seconds = 0
+        showTime(seconds)
+
+        initSudoku()
 
         timer = setInterval(() => {
             if (!pause) {
