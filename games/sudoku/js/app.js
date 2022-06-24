@@ -67,12 +67,84 @@
 
     const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8)
 
-    // generate sudoku puzzle
+    const clearSudoku = () => {
+        for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+            cells[i].innerHTML = ''
+            cells[i].classList.remove('filled')
+            cells[i].classList.remove('selected')
+        }
+    }
+
     const initSudoku = () => {
+        // clear old sudoku
+        clearSudoku()
+        
+        // generate sudoku puzzle
         su = sudokuGen(level)
         su_answer = [...su.question]
         console.table(su_answer)
+
+        // show sudoku to div
+        for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+            let row = Math.floor(i / CONSTANT.GRID_SIZE)
+            let col = i % CONSTANT.GRID_SIZE
+
+            cells[i].setAttribute('data-value', su.question[row][col])
+
+            if (su.question[row][col] !== 0) {
+                cells[i].classList.add('filled')
+                cells[i].innerHTML = su.question[row][col]
+            }
+        }
     }
+
+
+    // cells hover change
+
+    const hoverBg = (index) => {
+        let row = Math.floor(index / CONSTANT.GRID_SIZE)
+        let col = index % CONSTANT.GRID_SIZE
+
+        let box_start_row = row - row % 3
+        let box_start_col = col - col % 3
+
+        for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
+            for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
+                let cell = cells[9 * (box_start_row + i) + (box_start_col + j)]
+                cell.classList.add('hover')
+            }
+        }
+
+        // col hover
+        let step = 9
+        while (index - step >= 0) {
+            cells[index - step].classList.add('hover')
+            step += 9
+        }
+        step = 9
+        while (index + step < Math.pow(CONSTANT.GRID_SIZE, 2)) {
+            cells[index + step].classList.add('hover')
+            step += 9
+        }
+
+        // row hover
+        step = 1
+        while (index - step >= row * 9) {
+            cells[index - step].classList.add('hover')
+            step += 1
+        }
+        step = 1
+        while (index + step < row * 9 + 1) {
+            cells[index + step].classList.add('hover')
+            step += 1
+        }
+    }
+
+    const resetBg = () => {
+        cells.forEach(e => e.classList.remove('hover'))
+    }
+
+    // ------------------------------------------------------
 
     const startGame = () => {
         start_screen.classList.remove('active')
@@ -86,8 +158,6 @@
 
         seconds = 0
         showTime(seconds)
-
-        initSudoku()
 
         timer = setInterval(() => {
             if (!pause) {
@@ -120,6 +190,7 @@
 
     get('#btn_play').addEventListener('click', () => {
         if (name_input.value.trim().length > 0) {
+            initSudoku()
             startGame()
         } else {
             name_input.classList.add('input-err')
