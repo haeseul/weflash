@@ -24,3 +24,9 @@
 - text-input 란 : error 시 bounce animation
   - cubic-bezier 사용 (컴퓨터 그래픽에서 사용하는 곡선 모델)
   - @keyframes 사용
+
+
+### 스도쿠 알고리즘 참고 사이트
+https://dlbeer.co.nz/articles/sudoku.html
+https://projecteuler.net/problem=96
+https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=rechido&logNo=221405329316
