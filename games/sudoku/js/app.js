@@ -22,6 +22,7 @@
     const cells = getAll('.main_grid_cell')
 
     const name_input = get('#input_name')
+    const number_inputs = getAll('.number')
 
     const player_name = get('#player_name')
     const game_level = get('#game_level')
@@ -37,6 +38,8 @@
 
     let su = undefined
     let su_answer = undefined
+
+    let selected_cell = -1
 
     // ------------------------------------------------------
 
@@ -78,6 +81,7 @@
     const initSudoku = () => {
         // clear old sudoku
         clearSudoku()
+        resetBg()
         
         // generate sudoku puzzle
         su = sudokuGen(level)
@@ -134,7 +138,7 @@
             step += 1
         }
         step = 1
-        while (index + step < row * 9 + 1) {
+        while (index + step < row * 9 + 9) {
             cells[index + step].classList.add('hover')
             step += 1
         }
@@ -142,6 +146,103 @@
 
     const resetBg = () => {
         cells.forEach(e => e.classList.remove('hover'))
+    }
+
+    const checkErr = (value) => {
+        const addErr = (cell) => {
+            if (parseInt(cell.getAttribute('data-value')) === value) {
+                cell.classList.add('err')
+                cell.classList.add('cell-err')
+                setTimeout(() => {
+                    cell.classList.remove('cell-err')
+                }, 500);
+            }
+        }
+
+        let index = selected_cell
+
+        let row = Math.floor(index / CONSTANT.GRID_SIZE)
+        let col = index % CONSTANT.GRID_SIZE
+
+        let box_start_row = row - row % 3
+        let box_start_col = col - col % 3
+
+        for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
+            for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
+                let cell = cells[9 * (box_start_row + i) + (box_start_col + j)]
+                if(!cell.classList.contains('selected')) addErr(cell)
+            }
+        }
+
+        // col hover
+        let step = 9
+        while (index - step >= 0) {
+            addErr(cells[index - step])
+            step += 9
+        }
+        step = 9
+        while (index + step < Math.pow(CONSTANT.GRID_SIZE, 2)) {
+            addErr(cells[index + step])
+            step += 9
+        }
+
+        // row hover
+        step = 1
+        while (index - step >= row * 9) {
+            addErr(cells[index - step])
+            step += 1
+        }
+        step = 1
+        while (index + step < row * 9 + 9) {
+            addErr(cells[index + step])
+            step += 1
+        }
+    }
+
+    const removeErr = () => cells.forEach(e => e.classList.remove('err'))
+
+    const initNumberInputEvent = () => {
+        number_inputs.forEach((e, index) => {
+            e.addEventListener('click', () => {
+                if (!cells[selected_cell].classList.contains('filled')) {
+                    cells[selected_cell].innerHTML = index + 1
+                    cells[selected_cell].setAttribute('data-value', index + 1)
+                    
+                    // add to answer
+                    let row = Math.floor(selected_cell / CONSTANT.GRID_SIZE)
+                    let col = selected_cell % CONSTANT.GRID_SIZE
+                    su_answer[row][col] = index + 1
+
+                    // save game
+
+                    removeErr()
+                    checkErr(index + 1)
+                    cells[selected_cell].classList.add('zoom-in')
+                    setTimeout(() => {
+                        cells[selected_cell].classList.remove('zoom-in')
+                    }, 500);
+
+                    // check game win
+
+                }
+            })
+        })
+    }
+
+    const initCellsEvent = () => {
+        cells.forEach((e, index) => {
+            e.addEventListener('click', () => {
+                if (!e.classList.contains('filled')) {
+                    cells.forEach(e => e.classList.remove('selected'))
+
+                    selected_cell = index
+                    e.classList.remove('err')
+                    e.classList.add('selected')
+                    resetBg()
+                    hoverBg(index)
+                }
+            })
+        })
     }
 
     // ------------------------------------------------------
@@ -228,6 +329,8 @@
         get('#btn_continue').style.display = game ? 'grid' : 'none'
 
         initGameGrid()
+        initCellsEvent()
+        initNumberInputEvent()
 
         if (getPlayerName()) {
             name_input.value = getPlayerName()
