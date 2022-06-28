@@ -18,6 +18,7 @@
     const start_screen = get('#start_screen')
     const game_screen = get('#game_screen')
     const pause_screen = get('#pause_screen')
+    const result_screen = get('#result_screen')
 
     const cells = getAll('.main_grid_cell')
 
@@ -28,6 +29,7 @@
     const game_level = get('#game_level')
     const game_time = get('#game_time')
     const main_game_info_time = get('.main_game_info_time')
+    const result_time = get('#result_time')
 
     let level_index = 0
     let level = CONSTANT.LEVEL[level_index]
@@ -44,7 +46,7 @@
     // ------------------------------------------------------
 
 
-    const getGameInfo = () => JSON.parse(localStorage.getItem('game'))
+    // const getGameInfo = () => JSON.parse(localStorage.getItem('game'))
 
 
     // add space for each 0 cells
@@ -86,7 +88,10 @@
         // generate sudoku puzzle
         su = sudokuGen(level)
         su_answer = [...su.question]
-        console.table(su_answer)
+        // console.table(su_answer)
+         
+        seconds = 0
+        saveGameInfo()
 
         // show sudoku to div
         for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
@@ -101,6 +106,31 @@
             }
         }
     }
+
+    // const loadSudoku = () => {
+    //     let game = getGameInfo()
+
+    //     game_level.innerHTML = CONSTANT.LEVEL_NAME[game.level]
+
+    //     su = game.su
+    //     su_answer = su.answer
+    //     seconds = game.seconds
+    //     game_time.innerHTML = showTime(seconds)
+    //     level_index = game.level
+
+    //     // show sudoku to div
+    //     for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+    //         let row = Math.floor(i / CONSTANT.GRID_SIZE)
+    //         let col = i % CONSTANT.GRID_SIZE
+
+    //         cells[i].setAttribute('data-value', su_answer[row][col])
+    //         cells[i].innerHTML = su_answer[row][col] !== 0 ? su_answer[row][col] : ''
+
+    //         if (su.question[row][col] !== 0) {
+    //             cells[i].classList.add('filled')
+    //         }
+    //     }
+    // }
 
 
     // cells hover change
@@ -201,6 +231,34 @@
 
     const removeErr = () => cells.forEach(e => e.classList.remove('err'))
 
+    const saveGameInfo = () => {
+        let game = {
+            level: level_index,
+            seconds: seconds,
+            su: {
+                original: su.original,
+                question: su.question,
+                answer: su_answer
+            }
+        }
+        localStorage.setItem('game', JSON.stringify(game))
+    }
+
+    const removeGameInfo = () => {
+        localStorage.removeItem('game')
+        get('#btn_continue').style.display = 'none'
+    }
+
+    const isGameWin = () => sudokuCheck(su_answer)
+
+    const showResult = () => {
+        clearInterval(timer)
+        main_game_info_time.style.visibility = 'hidden'
+        game_time.innerHTML = '00:00:00'
+        result_screen.classList.add('active')
+        result_time.innerHTML = showTime(seconds)
+    }
+
     const initNumberInputEvent = () => {
         number_inputs.forEach((e, index) => {
             e.addEventListener('click', () => {
@@ -214,6 +272,7 @@
                     su_answer[row][col] = index + 1
 
                     // save game
+                    saveGameInfo()
 
                     removeErr()
                     checkErr(index + 1)
@@ -223,7 +282,10 @@
                     }, 500);
 
                     // check game win
-
+                    if (isGameWin()) {
+                        removeGameInfo()
+                        showResult()
+                    }
                 }
             })
         })
@@ -278,6 +340,7 @@
         pause_screen.classList.remove('active')
         main_game_info_time.style.visibility = 'hidden'
         game_time.innerHTML = '00:00:00'
+        result_screen.classList.remove('active')
     }
 
 
@@ -302,6 +365,19 @@
         }
     })
 
+    // get('#btn_continue').addEventListener('click', () => {
+    //     if (name_input.value.trim().length > 0) {
+    //         loadSudoku()
+    //         startGame()
+    //     } else {
+    //         name_input.classList.add('input-err')
+    //         setTimeout(() => {
+    //             name_input.classList.remove('input-err')
+    //             name_input.focus()
+    //         }, 500);
+    //     }
+    // })
+
     get('#btn_pause').addEventListener('click', () => {
         pause_screen.classList.add('active')
         pause = true
@@ -316,6 +392,20 @@
         returnStartScreen()
     })
 
+    get('#btn_new_game_2').addEventListener('click', () => {
+        returnStartScreen()
+    })
+    
+    get('#btn_delete').addEventListener('click', () => {
+        cells[selected_cell].innerHTML = ''
+        cells[selected_cell].setAttribute('data-value', 0)
+                
+        let row = Math.floor(selected_cell / CONSTANT.GRID_SIZE)
+        let col = selected_cell % CONSTANT.GRID_SIZE
+        su_answer[row][col] = 0
+        removeErr()
+    })
+
     // ------------------------------------------------------
 
 
@@ -324,9 +414,9 @@
         document.body.classList.add(darkmode ? 'dark' : 'light')
         get('meta[name="theme_color"]').setAttribute('content', darkmode ? '#1a1a2e' : '#fff')
 
-        const game = getGameInfo()
+        // const game = getGameInfo()
 
-        get('#btn_continue').style.display = game ? 'grid' : 'none'
+        // get('#btn_continue').style.display = game ? 'grid' : 'none'
 
         initGameGrid()
         initCellsEvent()

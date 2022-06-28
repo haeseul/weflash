@@ -8,7 +8,6 @@ const newGrid = (size) => {
     for (let i = 0; i < Math.pow(size, 2); i++) {
         arr[Math.floor(i/size)][i%size] = CONSTANT.UNASSIGNED
     }
-
     return arr
 }
 
@@ -118,7 +117,7 @@ const sudokuCreate = (grid) => {
         }
         
     })
-
+    
     return isFullGrid(grid)
 }
 
