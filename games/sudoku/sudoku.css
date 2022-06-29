@@ -1,13 +1,16 @@
 :root {
+    --start-box-x: 80px;
+    --start-box-y: 280px;
+
     --bg-main: #f0f2f5;
     --bg-body: #fff;
     --color-txt: #000;
     --filled-color: #000;
-    --filled-bg: #caf0f8;
+    --filled-bg: #ffeed4;
 
     --white: #fff;
-    --blue: #00aeef;
-    --red: #e91e47;
+    --orange: #ef8f00;
+    --red: #f65071;
     --black: #000;
 
     --nav-size: 60px;
@@ -22,6 +25,11 @@
     --font-size: 1rem;
     --font-size-lg: 1.5rem;
     --font-size-xl: 2rem;
+}
+
+@font-face {
+    font-family: "NEODGM";
+    src: url('../../assets/fonts/NEODGM.TTF');
 }
 
 .dark {
@@ -40,7 +48,7 @@
 }
 
 body {
-    font-family: 'Potta One', cursive;
+    font-family: "NEODGM";
     height: 100vh;
     background-color: var(--bg-body);
     overflow: hidden;
@@ -48,14 +56,14 @@ body {
 }
 
 input {
-    font-family: 'Potta One', cursive;
+    font-family: "NEODGM";
     border: 2px solid var(--bg-main);
     color: var(--color-txt)
 }
 
 input:hover,
 input:focus {
-    border-color: var(--blue);
+    border-color: var(--orange);
 }
 
 a {
@@ -89,11 +97,11 @@ nav {
 
 .nav_logo {
     font-size: var(--font-size-lg);
-    color: var(--blue);
+    color: var(--orange);
 }
 
 .dark_mode_toggle {
-    color: var(--blue);
+    color: var(--orange);
     font-size: var(--font-size-lg);
     cursor: pointer;
     z-index: 100;
@@ -151,9 +159,13 @@ nav {
     margin-top: 20px;
 }
 
+.tag {
+    margin: 8px 0 4px 16px;
+}
+
 .input_name {
-    height: 80px;
-    width: 280px;
+    height: var(--start-box-x);
+    width: var(--start-box-y);
     border-radius: var(--border-radious);
     outline: 0;
     background-color: var(--bg-main);
@@ -163,8 +175,8 @@ nav {
 }
 
 .btn {
-    height: 80px;
-    width: 280px;
+    height: var(--start-box-x);
+    width: var(--start-box-y);
     background-color: var(--bg-main);
     color: var(--color-txt);
     border-radius: var(--border-radious);
@@ -176,9 +188,20 @@ nav {
     cursor: pointer;
 }
 
-.btn_blue {
-    background: var(--blue);
+.btn_level:hover,
+.btn_level:focus {
+    border: 2px solid var(--orange);
+}
+
+.btn_new_game:hover {
+    background: var(--orange);
     color: var(--white);
+}
+
+.btn_orange {
+    background: var(--orange);
+    color: var(--white);
+    margin-bottom: 50px;
 }
 
 .input-err {
@@ -220,7 +243,7 @@ nav {
     height: var(--sudoku-cell-size);
     border-radius: var(--border-radious);
     background-color: var(--bg-main);
-    color: var(--blue);
+    color: var(--orange);
     font-size: var(--font-size);
     cursor: pointer;
 }
@@ -231,20 +254,20 @@ nav {
 }
 
 .main_grid_cell.selected {
-    background-color: var(--blue);
+    background-color: var(--orange);
     color: var(--white);
 }
 
 .main_grid_cell:hover {
-    border: 2px solid var(--blue);
+    border: 2px solid var(--orange);
 }
 
 .main_grid_cell.hover {
-    border: 3px solid var(--blue);
+    border: 1.5px solid var(--orange);
 }
 
 .dark .main_grid_cell.hover {
-    border: 1px solid var(--blue);
+    border: 1px solid var(--orange);
 }
 
 .main_grid_cell.err {
@@ -276,9 +299,9 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: calc(calc(var(--sudoku-cell-size)*3) + 10px);
+    width: calc(calc(var(--sudoku-cell-size)*3) + 5px);
     padding: 0 0 0 1rem;
-    margin-right: 4.3rem;
+    margin-right: 3rem;
 }
 
 .pause_btn {
@@ -287,7 +310,7 @@ nav {
     width: 30px;
     height: 30px;
     right: 10px;
-    background-color: var(--blue);
+    background-color: var(--orange);
     border-radius: var(--border-radious);
     color: var(--white);
     font-size: var(--font-size);
@@ -349,7 +372,7 @@ nav {
 
 .result_screen .congrate {
     font-size: var(--font-size-xl);
-    color: var(--blue);
+    color: var(--orange);
 }
 
 .result_screen .info {
@@ -358,7 +381,7 @@ nav {
 }
 
 #result_time {
-    color: var(--blue);
+    color: var(--orange);
     font-size: var(--font-size-xl);
 }
 
@@ -375,7 +398,7 @@ nav {
 }
 
 @keyframes zoom-in {
-    0% {transform: scale(3);}
+    0% {transform: scale(1.3);}
     100% {transform: scale(1);}
 }
 
@@ -384,8 +407,8 @@ nav {
 }
 
 @keyframes zoom-out-shake {
-    0% {transform: scale(2);}
-    25% {transform: scale(2) rotate(30deg);}
-    50% {transform: scale(2) rotate(-30deg);}
+    0% {transform: scale(1.3);}
+    25% {transform: scale(1.3) rotate(30deg);}
+    50% {transform: scale(1.3) rotate(-30deg);}
     100% {transform: scale(1);}
 }

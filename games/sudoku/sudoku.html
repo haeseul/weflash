@@ -7,10 +7,6 @@
     <!-- mobile status bar color -->
     <meta name="theme_color" content="#fff">
     <title>Sudoku</title>
-    <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
     <!-- box icons -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <!-- app css -->
@@ -44,12 +40,13 @@
 
             <!-- start screen -->
             <div class="start_screen active" id="start_screen">
-                <input type="text" placeholder="Your name" maxlength="11" class="input_name" id="input_name">
-                <div class="btn" id="btn_level">
-                    Easy
+                <div class="name_level">
+                    <div class="tag name">name</div>
+                    <input type="text" placeholder="이름을 입력하세요" maxlength="11" class="input_name" id="input_name">
+                    <div class="tag level">level</div>
+                    <div class="btn btn_level" id="btn_level">Easy</div>
                 </div>
-                <!-- <div class="btn" id="btn_continue">Continue</div> -->
-                <div class="btn btn_blue" id="btn_play">New Game</div>
+                <div class="btn btn_orange" id="btn_play">New Game</div>
             </div>
             <!-- end start screen -->
             
@@ -170,18 +167,18 @@
 
             <!-- pause screen -->
             <div class="pause_screen" id="pause_screen">
-                <div class="btn btn_blue" id="btn_resume">Resume</div>
-                <div class="btn" id="btn_new_game">New Game</div>
+                <div class="btn btn_orange" id="btn_resume">이어서하기</div>
+                <div class="btn btn_new_game" id="btn_new_game">New Game</div>
             </div>
             <!-- end pause screen -->
 
 
             <!-- result screen -->
             <div class="result_screen" id="result_screen">
-                <div class="congrate">Competed</div>
-                <div class="info">Time</div>
+                <div class="congrate">성공했습니다!</div>
+                <div class="info">소요시간</div>
                 <div id="result_time"></div>
-                <div class="btn" id="btn_new_game_2">New Game</div>
+                <div class="btn btn_new_game" id="btn_new_game_2">New Game</div>
             </div>
             <!-- end result screen -->
 

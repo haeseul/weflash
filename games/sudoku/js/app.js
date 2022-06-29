@@ -46,7 +46,6 @@
     // ------------------------------------------------------
 
 
-    // const getGameInfo = () => JSON.parse(localStorage.getItem('game'))
 
 
     // add space for each 0 cells
@@ -87,11 +86,10 @@
         
         // generate sudoku puzzle
         su = sudokuGen(level)
-        su_answer = [...su.question]
-        // console.table(su_answer)
+        su_answer = [...su.original]
+        console.table(su_answer)
          
         seconds = 0
-        saveGameInfo()
 
         // show sudoku to div
         for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
@@ -107,30 +105,6 @@
         }
     }
 
-    // const loadSudoku = () => {
-    //     let game = getGameInfo()
-
-    //     game_level.innerHTML = CONSTANT.LEVEL_NAME[game.level]
-
-    //     su = game.su
-    //     su_answer = su.answer
-    //     seconds = game.seconds
-    //     game_time.innerHTML = showTime(seconds)
-    //     level_index = game.level
-
-    //     // show sudoku to div
-    //     for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
-    //         let row = Math.floor(i / CONSTANT.GRID_SIZE)
-    //         let col = i % CONSTANT.GRID_SIZE
-
-    //         cells[i].setAttribute('data-value', su_answer[row][col])
-    //         cells[i].innerHTML = su_answer[row][col] !== 0 ? su_answer[row][col] : ''
-
-    //         if (su.question[row][col] !== 0) {
-    //             cells[i].classList.add('filled')
-    //         }
-    //     }
-    // }
 
 
     // cells hover change
@@ -231,25 +205,8 @@
 
     const removeErr = () => cells.forEach(e => e.classList.remove('err'))
 
-    const saveGameInfo = () => {
-        let game = {
-            level: level_index,
-            seconds: seconds,
-            su: {
-                original: su.original,
-                question: su.question,
-                answer: su_answer
-            }
-        }
-        localStorage.setItem('game', JSON.stringify(game))
-    }
 
-    const removeGameInfo = () => {
-        localStorage.removeItem('game')
-        get('#btn_continue').style.display = 'none'
-    }
-
-    const isGameWin = () => sudokuCheck(su_answer)
+    const isGameWin = () => sudokuCheck(su.question)
 
     const showResult = () => {
         clearInterval(timer)
@@ -269,10 +226,7 @@
                     // add to answer
                     let row = Math.floor(selected_cell / CONSTANT.GRID_SIZE)
                     let col = selected_cell % CONSTANT.GRID_SIZE
-                    su_answer[row][col] = index + 1
-
-                    // save game
-                    saveGameInfo()
+                    su.question[row][col] = index + 1
 
                     removeErr()
                     checkErr(index + 1)
@@ -283,7 +237,6 @@
 
                     // check game win
                     if (isGameWin()) {
-                        removeGameInfo()
                         showResult()
                     }
                 }
@@ -332,6 +285,7 @@
 
 
     const returnStartScreen = () => {
+        console.clear()
         clearInterval(timer)
         pause = false
         seconds = 0
@@ -365,18 +319,6 @@
         }
     })
 
-    // get('#btn_continue').addEventListener('click', () => {
-    //     if (name_input.value.trim().length > 0) {
-    //         loadSudoku()
-    //         startGame()
-    //     } else {
-    //         name_input.classList.add('input-err')
-    //         setTimeout(() => {
-    //             name_input.classList.remove('input-err')
-    //             name_input.focus()
-    //         }, 500);
-    //     }
-    // })
 
     get('#btn_pause').addEventListener('click', () => {
         pause_screen.classList.add('active')
@@ -388,10 +330,14 @@
         pause = false
     })
 
-    get('#btn_new_game').addEventListener('click', () => {
+    get('.nav_logo').addEventListener('click', () => {
         returnStartScreen()
     })
 
+    get('#btn_new_game').addEventListener('click', () => {
+        returnStartScreen()
+    })
+    
     get('#btn_new_game_2').addEventListener('click', () => {
         returnStartScreen()
     })
@@ -414,9 +360,6 @@
         document.body.classList.add(darkmode ? 'dark' : 'light')
         get('meta[name="theme_color"]').setAttribute('content', darkmode ? '#1a1a2e' : '#fff')
 
-        // const game = getGameInfo()
-
-        // get('#btn_continue').style.display = game ? 'grid' : 'none'
 
         initGameGrid()
         initCellsEvent()

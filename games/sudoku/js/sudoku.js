@@ -8,6 +8,7 @@ const newGrid = (size) => {
     for (let i = 0; i < Math.pow(size, 2); i++) {
         arr[Math.floor(i/size)][i%size] = CONSTANT.UNASSIGNED
     }
+    console.log(arr)
     return arr
 }
 
@@ -117,7 +118,7 @@ const sudokuCreate = (grid) => {
         }
         
     })
-    
+
     return isFullGrid(grid)
 }
 
@@ -169,10 +170,11 @@ const removeCells = (grid, level) => {
 const sudokuGen = (level) => {
     let sudoku = newGrid(CONSTANT.GRID_SIZE)
     let check = sudokuCreate(sudoku)
+    let original = JSON.parse(JSON.stringify(sudoku))
     if (check) {
         let question = removeCells(sudoku, level)
         return {
-            original: sudoku,
+            original: original,
             question: question
         }
     }

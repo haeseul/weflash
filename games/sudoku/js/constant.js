@@ -11,5 +11,5 @@ const CONSTANT = {
         'Insane',
         'Inhuman'
     ],
-    LEVEL: [29, 38, 47, 56, 65, 74]
+    LEVEL: [1, 38, 47, 56, 65, 74]
 }
