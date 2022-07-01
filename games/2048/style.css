@@ -8,6 +8,7 @@
     --nav-size: 180px;
 
     --body-size: 600px;
+    --td-bg: #9e9184;
     --td-width: 111px;
     --td-height: 120px;
     
@@ -145,12 +146,12 @@ nav {
     border-color: grey;
 }
 
-.table td {
+td {
     display: table-cell;
     vertical-align: inherit;
     border: 4px solid var(--bg-main);
     border-radius: 9px;
-    background-color: var(--txt-white);
+    background-color: var(--td-bg);
     width: var(--td-width);
     height: var(--td-height);
     font-size: 50px;
