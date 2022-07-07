@@ -1,6 +1,9 @@
 :root {
     --bg-main: #372c25;
 
+    --start-box-x: 100px;
+    --start-box-y: 250px;
+
     --txt-white: #f0f2f5;
     --white: #fff;
     --black: #000;
@@ -19,6 +22,7 @@
     --border-radious: 10px;
 
     --font-size: 1rem;
+    --font-size-m: 2rem;
     --font-size-l: 3rem;
 }
 
@@ -48,6 +52,78 @@ body {
 nav {
     width: 100%;
     z-index: 99;
+}
+
+.screen {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-width: 400px;
+}
+
+.start_screen,
+.pause_screen,
+.result_screen {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-main);
+}
+
+.big_logo, 
+.game_over {
+    font-size: var(--font-size-l);
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.btn {
+    height: var(--start-box-x);
+    width: var(--start-box-y);
+    background-color: var(--td-bg);
+    color: var(--white);
+    font-weight: 900;
+    border-radius: var(--border-radious);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background-color: var(--block-bg);
+    cursor: pointer;
+}
+
+.start_btn {
+    font-size: var(--font-size-l);
+}
+
+.btn_resume,
+.btn_new_game {
+    font-size: var(--font-size-m);
+}
+
+.btn_resume {
+    margin-bottom: 20px;
+}
+
+.start_screen.active,
+.main_game.active,
+.pause_screen.active,
+.result_screen.active {
+    visibility: visible;
+}
+
+.main_game {
+    visibility: hidden;
 }
 
 .nav_container {
@@ -98,6 +174,7 @@ nav {
     color: var(--block-bg);
     border-radius: 3px;
     margin-left: 8px;
+    cursor: pointer;
 }
 
 .new_game {
@@ -110,6 +187,11 @@ nav {
     height: var(--block-height);
     border-radius: var(--border-radious);
     font-size: var(--font-size);
+}
+
+.new_game:hover {
+    background: var(--td-bg);
+    cursor: pointer;
 }
 
 .score_box {
@@ -158,4 +240,17 @@ td {
     font-size: 50px;
     font-weight: bold;
     text-align: center;
+}
+
+.info {
+    color: var(--white);
+    font-size: var(--font-size);
+}
+
+.result_time,
+.result_score {
+    color: var(--white);
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    margin-bottom: 20px;
 }

@@ -10,52 +10,79 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <nav>
-        <div class="nav_container">
-            <div class="left_container">
-                <div class="logo">2048</div>
-                <div class="time_box">
-                    <div class="time">00:00:00</div>
-                    <div class="pause">
-                        <i class="bx bx-pause"></i>
+    <div class="screen">
+        <div class="start_screen active" id="start_screen">
+            <div class="big_logo">2048</div>
+            <div class="btn start_btn">Start!</div>
+        </div>
+    
+    
+        <div class="main_game " id="game_screen">
+            <nav>
+                <div class="nav_container">
+                    <div class="left_container">
+                        <div class="logo">2048</div>
+                        <div class="time_box">
+                            <div class="time">00:00:00</div>
+                            <div class="pause">
+                                <i class="bx bx-pause"></i>
+                            </div>
+                        </div>
+                        <div class="new_game">New Game</div>
+                    </div>
+                    <div class="score_box">
+                        <div class="score_txt">score</div>
+                        <div class="score">0</div>
                     </div>
                 </div>
-                <div class="new_game">New Game</div>
-            </div>
-            <div class="score_box">
-                <div class="score_txt">score</div>
-                <div class="score">0</div>
-            </div>
+            </nav>
+    
+            <table class="table">
+                <tr>
+                    <td class="0" id="00"></td>
+                    <td class="1" id="01"></td>
+                    <td class="2" id="02"></td>
+                    <td class="3" id="03"></td>
+                </tr>
+                <tr>
+                    <td class="4" id="10"></td>
+                    <td class="5" id="11"></td>
+                    <td class="6" id="12"></td>
+                    <td class="7" id="13"></td>
+                </tr>
+                <tr>
+                    <td class="8" id="20"></td>
+                    <td class="9" id="21"></td>
+                    <td class="10" id="22"></td>
+                    <td class="11" id="23"></td>
+                </tr>
+                <tr>
+                    <td class="12" id="30"></td>
+                    <td class="13" id="31"></td>
+                    <td class="14" id="32"></td>
+                    <td class="15" id="33"></td>
+                </tr>
+            </table>
         </div>
-    </nav>
+    
+    
+        <div class="pause_screen" id="pause_screen">
+            <div class="btn btn_resume">이어서하기</div>
+            <div class="btn btn_new_game" id="btn_new_game">New Game</div>
+        </div>
+    
+    
+        <div class="result_screen" id="result_screen">
+            <div class="game_over">Game Over</div>
+            <div class="info">점수</div>
+            <div class="result_score"></div>
+            <div class="info">소요시간</div>
+            <div class="result_time"></div>
+            <div class="btn btn_new_game" id="btn_new_game_2">New Game</div>
+        </div>
 
-    <table class="table">
-        <tr>
-            <td class="0" id="00"></td>
-            <td class="1" id="01"></td>
-            <td class="2" id="02"></td>
-            <td class="3" id="03"></td>
-        </tr>
-        <tr>
-            <td class="4" id="10"></td>
-            <td class="5" id="11"></td>
-            <td class="6" id="12"></td>
-            <td class="7" id="13"></td>
-        </tr>
-        <tr>
-            <td class="8" id="20"></td>
-            <td class="9" id="21"></td>
-            <td class="10" id="22"></td>
-            <td class="11" id="23"></td>
-        </tr>
-        <tr>
-            <td class="12" id="30"></td>
-            <td class="13" id="31"></td>
-            <td class="14" id="32"></td>
-            <td class="15" id="33"></td>
-        </tr>
-    </table>
-    <!-- <script src="script.js"></script> -->
-    <script src="script copy.js"></script>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

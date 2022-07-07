@@ -2,198 +2,306 @@
     'use strict'
 
     const get = (target) => document.querySelector(target)
-    const getAll = (target) => document.querySelectorAll(target)
 
-    const table = get('.table')
-    const $score = get('score')
-    
-    let data = []
-    const index = [1,2,3,4]
+    const start_screen = get('#start_screen')
+    const game_screen = get('#game_screen')
+    const pause_screen = get('#pause_screen')
+    const result_screen = get('#result_screen')
 
-    const start = () => {
-        const fragment = document.createDocumentFragment()
+    let $score = get('.score')
+    const $time = get('.time')
+    const $result_score = get('.result_score')
+    const $result_time = get('.result_time')
 
-        index.forEach(function () {
-            const rowData = []
-            data.push(rowData)
-            const tr = document.createElement('tr')
+    let timer = null
+    let pause = false
+    let seconds = 0
 
-            index.forEach(() => {
-                rowData.push(0)
-                const td = document.createElement('td')
-                tr.appendChild(td)
-            })
-            fragment.appendChild(tr)
-        })
-        table.appendChild(fragment)
-    }
+    let board = Array(Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0))
+    let score
 
-    const put2 = () => {
-        const emptyCells = []
-        data.forEach((rowData, i) => {
-            rowData.forEach((cellData, j) => {
-                if(!cellData) {
-                    emptyCells.push([i, j])
+
+    // 새로운 숫자 생성
+    const generate = () => {
+        let count = 0
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (board[i][j] == 0) count++;
+            }
+        }
+        while(true) {
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    if (board[i][j] == 0) {
+                        let rand = parseInt(Math.random() * count)
+                        if (rand == 0) {
+                            board[i][j] = choose2or4()
+                            return
+                        }
+                    }
                 }
-            })
-        })
-
-        const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
-        data[randomCell[0]][randomCell[1]] = 2
-        console.log(data)
+            }
+        }
     }
 
-    const draw = () => {
-        data.forEach((rowData, i) => {
-            rowData.forEach((cellData, j) => {
-                const target = table.children[i].children[j]
-                if (cellData > 0) {
-                    target.innerText = cellData
-                    target.className = 'color-' + cellData
+
+    // table에 표시
+    const update = () => {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                let cell = document.getElementById(i + '' + j)
+                cell.innerHTML = board[i][j]==0 ? '' : board[i][j]
+                coloring(cell)
+            }
+        }
+        $score.innerHTML = score
+    }
+
+    const coloring = (cell) => {
+        let cellNum = parseInt(cell.innerHTML)
+        switch (cellNum) {
+            case 0:
+            case 2: 
+                cell.style.background= "#eee4da"
+                cell.style.color= "#776e65"
+                break;
+            case 4: 
+                cell.style.background= "#eee1c9"
+                cell.style.color= "#776e65"
+                break;
+            case 8: 
+                cell.style.background= "#f3b27a"
+                cell.style.color= "#fff"
+                break;
+            case 16: 
+                cell.style.background= "#f69664"
+                cell.style.color= "#fff"
+                break;
+            case 32: 
+                cell.style.background= "#f77c5f"
+                cell.style.color= "#fff"
+                break;
+            case 64: 
+                cell.style.background= "#f75f3b"
+                cell.style.color= "#fff"
+                break;
+            case 128: 
+                cell.style.background= "#edd073"
+                cell.style.color= "#776e65"
+                break;
+            case 256: 
+                cell.style.background= "#edcc62"
+                cell.style.color= "#776e65"
+                break;
+            case 512: 
+                cell.style.background= "#edc950"
+                cell.style.color= "#776e65"
+                break;
+            case 1024: 
+                cell.style.background= "#edc53f"
+                cell.style.color= "#776e65"
+                break;
+            case 2048: 
+                cell.style.background= "#edc22e"
+                cell.style.color= "#776e65"
+                break;
+        
+            default:
+                if (cellNum > 2048) {
+                    cell.style.background= "#E51A1A"
+                    cell.style.color= "#776e65"
                 } else {
-                    target.innerText = ''
-                    target.className = ''
+                    cell.style.background= "#9e9184"
+                    cell.style.color= "#776e65"
                 }
-            })
-        })
-    }
-
-    const moveCells = (direction) => {
-        switch (direction){
-            case 'left':{   //case 문에 {} 를 사용하는 이유는 내부의 변수 를 새롭게 생성시 {} 를 사용해주는 것이 좋다
-                const newData = [[],[],[],[]];
-                data.forEach((rowData, i) => {
-                    rowData.forEach((cellData, j) => {
-                        if (cellData){
-                            const currentRow = newData[i] //newData = 지금 줄
-                            const prevData = currentRow[currentRow.length - 1];
-                            if(prevData === cellData){  //직전의 값이 지금 값과 같을 경우....
-                                const score = parseInt($score.textContent);
-                                $score.textContent = score + currentRow[currentRow.length -1]*2;
-                                currentRow[currentRow.length -1 ] *= -2;
-                            } else {
-                                newData[i].push(cellData);  //빈칸 제외하고 왼쪽 부터 넣어줌    
-                            }
-                            
-                        }
-                    });
-                });
-                console.log(newData);
-                index.forEach((rowData, i)=>{
-                    index.forEach((cellData,j) =>{
-                        data[i][j] = Math.abs(newData[i][j]) || 0; //원본 데이터 수정된 데이터
-                    });
-                });
                 break;
-            }
-            case 'right':{
-                const newData = [[],[],[],[]];
-                data.forEach((rowData,i) => {
-                    rowData.forEach((cellData, j)=>{
-                        if(rowData[3-j]) {
-                            const currentRow = newData[i]
-                            const prevData = currentRow[currentRow.length -1];
-                            if (prevData === rowData[3-j]) {
-                                const score = parseInt($score.textContent);
-                                $score.textContent = score + currentRow[currentRow.length -1]*2;
-                                currentRow[currentRow.length - 1]*= -2;
-                            } else {
-                                newData[i].push(rowData[3-j]);
-                            }
-                        }
-                    });
-                });
-                console.log(newData);
-                index.forEach((rowData,i) => {
-                    index.forEach((cellData,j) =>{
-                        data[i][3-j] = Math.abs(newData[i][j]) || 0;
-                    });
-                })
-                break;
-            }
-            case 'up':{
-                const newData = [[],[],[],[]];
-                data.forEach((rowData,i) =>{
-                    rowData.forEach((cellData,j) =>{
-                        if (cellData) {
-                            const currentRow = newData[j];
-                            const prevData = currentRow[currentRow.length -1];
-                            if (prevData === cellData) {
-                                const score = parseInt($score.textContent);
-                                $score.textContent = score + currentRow[currentRow.length -1]*2;
-                                currentRow[currentRow.length -1] *= -2;
-                            } else {
-                                newData[j].push(cellData);
-                            }
-                        }
-                    });
-                });
-                console.log(newData);
-                index.forEach((cellData, i) => {
-                    index.forEach((rowData , j) => {
-                    data[j][i] = Math.abs(newData[i][j]) || 0;
-                    });
-                });
-                break;
-            }
-            case 'down':{
-                const newData = [[],[],[],[]];
-                data.forEach((rowData, i) => {
-                    rowData.forEach((cellData,j) =>{
-                        if(data[3-i][j]) {
-                            const currentRow = newData[j];
-                            const prevData = currentRow[currentRow.length - 1];
-                            if (prevData === data[3-i][j]) {
-                                const score = parseInt($score.textContent);
-                                $score.textContent = score + currentRow[currentRow.length -1]*2;
-                                currentRow[currentRow.length -1] *= -2;
-                            } else {
-                                newData[j].push(data[3 -i][j]);
-                            }
-                        }
-                    });
-                });
-                console.log (newData);
-                index.forEach((cellData,i) => {
-                    index.forEach((rowData,j) => {
-                        data[3-j][i] = Math.abs(newData[i][j]) || 0;
-                    });
-                })
-                
-                break;
-            }
-        }
-
-        if (data.flat().includes(2048)) {
-            draw()
-            setTimeout(() => {
-                alert('Win')
-            }, 0);
-        } else if(!data.flat().includes(0)) {
-            alert(`패배. Score: ${score.innerText}`)
-        } else {
-            put2()
-            draw()
         }
     }
 
-    window.addEventListener('keyup', (e) => {
-        if (e.key === 'ArrowDataUp') {
-            moveCells('up')
-        } else if (e.key === 'ArrowDataDown') {
-            moveCells('down')
-        } else if (e.key === 'ArrowDataLeft') {
-            moveCells('left')
-        } else if (e.key === 'ArrowDataRight') {
-            moveCells('right')
+    const choose2or4 = () => {
+        // 2가 나올 확률 90%
+        const rand = parseInt(Math.random() * 10)
+        return (rand == 0)? 4 : 2
+    }
+
+    const checkGameOver = () => {
+        for(let i=0;i<4;i++){
+            let colCheck = board[i][0];
+            if(colCheck==0) return;
+            for(let j=1;j<4;j++){
+                if(board[i][j]==colCheck || board[i][j]==0) return;
+                else colCheck = board[i][j];
+            }
         }
+        for(let i=0;i<4;i++){
+            let rowCheck = board[0][i];
+            if(rowCheck==0) return;
+            for(let j=1;j<4;j++){
+                if(board[j][i]==rowCheck || board[j][i]==0) return;
+                else rowCheck = board[j][i];
+            }
+        }
+
+        showResult()
+    }
+
+    const rotate = (n) => {
+        while(n--) {
+            let tmpBoard = Array(Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0))
+            for(let i=0;i<4;i++)
+                for(let j=0;j<4;j++)
+                    tmpBoard[i][j]=board[i][j];
+            for(let i=0;i<4;i++)
+                for(let j=0;j<4;j++)
+                    board[j][3-i]=tmpBoard[i][j];
+        }
+    }
+
+    const move = () => {
+        let isMoved = false
+        let isPlused = Array(Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0))
+        for(let i=1;i<4;i++){
+            for(let j=0;j<4;j++){
+                if(board[i][j]==0) continue;
+                let tempY = i-1;
+                while(tempY>0 && board[tempY][j]==0) tempY--;
+                if(board[tempY][j]==0){
+                    board[tempY][j]=board[i][j];
+                    board[i][j]=0;
+                    isMoved=true;
+                }
+                else if(board[tempY][j]!=board[i][j]){
+                    if(tempY+1==i) continue;
+                    board[tempY+1][j]=board[i][j];
+                    board[i][j]=0;
+                    isMoved=true;
+                }
+                else{
+                    if(isPlused[tempY][j]==0){
+                        board[tempY][j]*=2;
+                        score+=board[tempY][j];
+                        board[i][j]=0;
+                        isPlused[tempY][j]=1;
+                        isMoved=true;
+                    }
+                    else{
+                        board[tempY+1][j]=board[i][j];
+                        board[i][j]=0;
+                        isMoved=true;
+                    }
+                }
+            }
+        }
+        if (isMoved) generate();
+        else checkGameOver();
+    }
+
+    
+    const keyDownEventHandler = (e) => {
+        switch (e.keyCode) {
+            case 38: // up
+                move();
+                break;
+            case 40: // down
+                rotate(2);
+                move();
+                rotate(2);
+                break;
+            case 37: // left
+                rotate(1);
+                move();
+                rotate(3);
+                break;
+            case 39: // right
+                rotate(3);
+                move();
+                rotate(1);
+                break;
+        }
+        update()
+    }
+
+    const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8)
+    
+    const returnStartScreen = () => {
+        console.clear()
+        clearInterval(timer)
+        pause = false
+        seconds = 0
+        start_screen.classList.add('active')
+        game_screen.classList.remove('active')
+        pause_screen.classList.remove('active')
+        $time.innerHTML = '00:00:00'
+        result_screen.classList.remove('active')
+    }
+
+    const showResult = () => {
+        clearInterval(timer)
+        $time.innerHTML = '00:00:00'
+        result_screen.classList.add('active')
+        $result_score.innerHTML = score
+        $result_time.innerHTML = showTime(seconds)
+    }
+
+    const init = () => {
+        document.onkeydown = keyDownEventHandler
+        
+        // board 초기화
+        score = 0
+        seconds = 0
+
+        showTime(seconds)
+
+        timer = setInterval(() => {
+            if (!pause) {
+                seconds += 1
+                $time.innerHTML = showTime(seconds)
+            }
+        }, 1000);
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                board[i][j] = 0
+            }
+        }
+        // 2개의 칸 채우기
+        for (let i = 0; i < 2; i++) {
+            let rand = parseInt(Math.random() * 16);
+            let x = rand % 4;
+            let y = parseInt(rand / 4);
+            if (board[y][x] == 0) board[y][x] = choose2or4();
+            else i--;
+        }
+        update()
+    }
+
+    
+
+    get('.start_btn').addEventListener('click', () => {
+        init()
+        start_screen.classList.remove('active')
+        game_screen.classList.add('active')
+    })
+
+    get('.pause').addEventListener('click', () => {
+        pause_screen.classList.add('active')
+        pause = true
+    })
+
+    get('.btn_resume').addEventListener('click', () => {
+        pause_screen.classList.remove('active')
+        pause = false
+    })
+
+    get('.new_game').addEventListener('click', () => {
+        returnStartScreen()
+    })
+
+    get('#btn_new_game').addEventListener('click', () => {
+        returnStartScreen()
     })
     
-    const init = () => {
-        start()
-        put2()
-        draw()
-    }
-
-    init()
+    get('#btn_new_game_2').addEventListener('click', () => {
+        returnStartScreen()
+    })
 })()
