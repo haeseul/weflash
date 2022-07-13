@@ -11,16 +11,18 @@
 <body>
     <div class="screen">
 
-        <div class="start-screen active">
+        <div class="start-screen ">
             <div class="sky">
-                <div class="logo">Flappy Bird</div>
-                <div class="info">Space bar를 누르면 참새가 날아오릅니다!</div>
-                <div class="start-btn">Start</div>
+                <div class="info-container">
+                    <div class="logo">Flappy Bird</div>
+                    <div class="info">Space bar를 누르면 참새가 날아오릅니다!</div>
+                    <div class="btn start-btn">Start</div>
+                </div>
             </div>
             <div class="ground"></div>
         </div>
     
-        <div class="game-container">
+        <div class="game-container active">
             <div class="sky">
                 <div class="bird"></div>
             </div>
@@ -29,7 +31,12 @@
             </div>
         </div>
     
-        <div class="end-screen"></div>
+        <div class="end-screen">
+            <div class="game-over">Game Over</div>
+            <div class="info">점수</div>
+            <div class="result-score"></div>
+            <div class="btn replay-btn">New Game</div>
+        </div>
         
     </div>
 </body>

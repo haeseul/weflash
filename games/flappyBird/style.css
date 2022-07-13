@@ -1,3 +1,32 @@
+:root {
+    --box-x: 100px;
+    --box-y: 250px;
+
+    --txt-white: #f0f2f5;
+    --white: #fff;
+    --black: #000;
+
+    --td-bg: #46b1e2;
+    
+    --block-bg: #3589af;
+    --block-width: 150px;
+    --block-height: 40px;
+
+    --border-radious: 10px;
+
+    --font-size: 1rem;
+    --font-size-m: 2rem;
+    --font-size-l: 3rem;
+}
+
+@font-face {
+    font-family: "NEODGM";
+    src: url(../font/NEODGM.TTF);
+}
+body {
+    font-family: "NEODGM";
+}
+
 .screen {
     position: relative;
     left: 30%;
@@ -7,6 +36,47 @@
     position: absolute;
     visibility: hidden;
     position: absolute;
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+}
+
+.logo,
+.game-over {
+    font-size: var(--font-size-l);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.info {
+    color: var(--white);
+    font-size: var(--font-size);
+    margin-bottom: 20px;
+}
+
+.btn {
+    height: var(--box-x);
+    width: var(--box-y);
+    background-color: var(--td-bg);
+    color: var(--white);
+    font-size: var(--font-size-m);
+    font-weight: 900;
+    border-radius: var(--border-radious);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background-color: var(--block-bg);
+    cursor: pointer;
 }
 
 .end-screen {
