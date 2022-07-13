@@ -1,0 +1,70 @@
+.screen {
+    position: relative;
+    left: 30%;
+}
+
+.start-screen {
+    position: absolute;
+    visibility: hidden;
+    position: absolute;
+}
+
+.end-screen {
+    visibility: hidden;
+    position: absolute;
+    margin: auto;
+}
+
+.game-container {
+    visibility: hidden;
+    width: 500px;
+    height: 730px;
+    position: absolute;
+    overflow: hidden;
+    margin: auto;
+}
+
+.start-screen.active,
+.end-screen.active,
+.game-container.active {
+    visibility: visible;
+}
+
+.sky {
+    background-image: url('./images/bg.png');
+    width: 500px;
+    height: 580px;
+    position: absolute;
+}
+
+.ground {
+    background-image: url('./images/fg.png');
+    width: 500px;
+    height: 150px;
+    position: absolute;
+    top: 580px;
+    z-index: +1;
+}
+
+.bird {
+    background-image: url('./images/bird.png');
+    position: absolute;
+    width: 60px;
+    height: 45px;
+}
+
+.obstacle {
+    background-image: url('./images/pipeSouth.png');
+    width: 60px;
+    height: 300px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.topObstacle {
+    background-image: url('./images/pipeSouth.png');
+    transform: rotate(180deg);
+    width: 60px;
+    height: 300px;
+    position: absolute;
+}
