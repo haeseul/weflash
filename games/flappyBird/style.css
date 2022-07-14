@@ -2,15 +2,11 @@
     --box-x: 100px;
     --box-y: 250px;
 
-    --txt-white: #f0f2f5;
     --white: #fff;
-    --black: #000;
+    --txt-black: rgb(94, 94, 94);
 
-    --td-bg: #46b1e2;
-    
+    --td-bg: #46b1e2;    
     --block-bg: #3589af;
-    --block-width: 150px;
-    --block-height: 40px;
 
     --border-radious: 10px;
 
@@ -25,17 +21,31 @@
 }
 body {
     font-family: "NEODGM";
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
 }
 
 .screen {
     position: relative;
-    left: 30%;
+    margin: auto;
+    margin-top: 2%;
+    width: 700px;
+    height: 730px;
 }
 
-.start-screen {
+.start-screen,
+.end-screen {
     position: absolute;
     visibility: hidden;
+}
+
+.game-container {
+    visibility: hidden;
     position: absolute;
+    width: 700px;
+    height: 730px;
+    overflow: hidden;
 }
 
 .info-container {
@@ -43,7 +53,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: auto;
     height: 100%;
 }
 
@@ -79,21 +88,6 @@ body {
     cursor: pointer;
 }
 
-.end-screen {
-    visibility: hidden;
-    position: absolute;
-    margin: auto;
-}
-
-.game-container {
-    visibility: hidden;
-    width: 500px;
-    height: 730px;
-    position: absolute;
-    overflow: hidden;
-    margin: auto;
-}
-
 .start-screen.active,
 .end-screen.active,
 .game-container.active {
@@ -102,18 +96,36 @@ body {
 
 .sky {
     background-image: url('./images/bg.png');
-    width: 500px;
+    background-repeat: repeat;
+    width: 700px;
     height: 580px;
     position: absolute;
 }
 
 .ground {
     background-image: url('./images/fg.png');
-    width: 500px;
+    background-repeat: repeat;
+    width: 700px;
     height: 150px;
     position: absolute;
     top: 580px;
     z-index: +1;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--txt-black);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.result-score {
+    color: var(--white);
+    font-size: var(--font-size-m);
+    margin-bottom: 20px;
 }
 
 .bird {

@@ -7,20 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bird = get('.bird')
     const gameDisplay = get('.game-container')
-    const ground = get('.ground')
+    const scoreDisplay = get('.score')
 
+    let gameTimerId
     let birdLeft = 220
     let birdBottom = 100
     let gravity = 2
     let isGameOver = false
     let gap = 430
+    let score = -1
 
-    function startGame() {
+    function generateBird() {
         birdBottom -= gravity
         bird.style.bottom = birdBottom + 'px'
         bird.style.left = birdLeft + 'px'
     }
-    let gameTimerId = setInterval(startGame, 20)
 
     // spacebar 누를 때만 점프 가능
     function control(e) {
@@ -37,9 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keyup', control)
 
     function generateObstacle() {
-        let obstacleLeft = 500
-        let randomHeight = Math.random() * 120
-        console.log(randomHeight)
+        let obstacleLeft = 700
+        let randomHeight = Math.random() * 130
         let obstacleBottom = randomHeight
 
         const obstacle = document.createElement('div')
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (
-                obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 && 
+                obstacleLeft > 195 && obstacleLeft < 280 && birdLeft === 220 && 
                 (birdBottom < obstacleBottom + 148 || birdBottom > obstacleBottom + gap - 198) ||
                 birdBottom === 0
                 ) {
@@ -76,28 +76,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         let timerId = setInterval(moveObstacle, 20)
-        if (!isGameOver) setTimeout(generateObstacle, 3500)  // 3초마다 장애물 생기기
+        if (!isGameOver) {
+            setTimeout(generateObstacle, 3000)  // 3초마다 장애물 생기기
+            score++
+            scoreDisplay.innerHTML = '점수 : ' + score + '점'
+        }
     }
 
     function gameOver() {
         clearInterval(gameTimerId)
-        console.log('game over')
         isGameOver = true
         document.removeEventListener('keyup', control)
         game_container.classList.remove('active')
         end_screen.classList.add('active')
+        get('.result-score').innerHTML = score + '점'
     }
 
-    generateObstacle()
+    function startGame() {
+        gameTimerId = setInterval(generateBird, 20)
+        generateObstacle()
+        scoreDisplay.innerHTML = '점수 : ' + score + '점'
+    }
 
+    
     get('.start-btn').addEventListener('click', () => {
         start_screen.classList.remove('active')
         game_container.classList.add('active')
+        startGame()
     })
-
+    
     get('.replay-btn').addEventListener('click', () => {
-        generateObstacle()
-        end_screen.classList.remove('active')
-        game_container.classList.add('active')
+        location.reload()
     })
 })
