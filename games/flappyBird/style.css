@@ -17,7 +17,7 @@
 
 @font-face {
     font-family: "NEODGM";
-    src: url(../font/NEODGM.TTF);
+    src: url(../../assets/fonts/NEODGM.TTF);
 }
 body {
     font-family: "NEODGM";
